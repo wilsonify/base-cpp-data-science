@@ -1,0 +1,13 @@
+# ninja log v5
+2	1011	1670796999440465411	CMakeFiles/dspack.dir/src/dspack/mysqrt.cpp.o	3d5cb4848852aef
+1012	1331	1670796999760492976	libdspack.so	1cf5419e25838b05
+13	3512	1670797001940680806	external/googletest/googletest/CMakeFiles/gtest_main.dir/src/gtest_main.cc.o	d19b2a97ea67e0d
+6	4544	1670797002972769748	external/googletest/googlemock/CMakeFiles/gmock_main.dir/src/gmock_main.cc.o	51f11042c4c2fa62
+0	5216	1670797003644827673	CMakeFiles/test-dspack.dir/test/test-dspack/test-mysqrt.cpp.o	858c34c4284705ae
+10	6267	1670797004692918019	external/googletest/googlemock/CMakeFiles/gmock.dir/src/gmock-all.cc.o	4a9b842036fd7bf3
+27	8536	1670797006961113590	external/googletest/googletest/CMakeFiles/gtest.dir/src/gtest-all.cc.o	fb557ca7417b6455
+8536	8634	1670797007061122215	lib/libgtest.a	c2a9ede8a7cf80a1
+8635	8692	1670797007121127390	lib/libgtest_main.a	b8f765265fd26447
+8634	8711	1670797007137128771	lib/libgmock.a	a5ad1524c7e2b7c2
+8711	8782	1670797007209134981	lib/libgmock_main.a	e59278df38ac4de5
+8692	8931	1670797007357147747	test-dspack	2279452e7f115bf

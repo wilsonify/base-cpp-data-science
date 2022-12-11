@@ -1,0 +1,120 @@
+Start testing: Dec 11 17:16 EST
+----------------------------------------------------------
+1/1 Testing: run-test-dspack
+1/1 Test: run-test-dspack
+Command: "/home/thom/repos/base-cpp-data-science/build/test-dspack"
+Directory: /home/thom/repos/base-cpp-data-science/build
+"run-test-dspack" start time: Dec 11 17:16 EST
+Output:
+----------------------------------------------------------
+Running main() from ../external/googletest/googletest/src/gtest_main.cc
+[==========] Running 5 tests from 2 test suites.
+[----------] Global test environment set-up.
+[----------] 4 tests from mysqrtTests
+[ RUN      ] mysqrtTests.returns5With25PassedIn
+Computing sqrt of 25 to be 13
+Computing sqrt of 25 to be 7.46154
+Computing sqrt of 25 to be 5.40603
+Computing sqrt of 25 to be 5.01525
+Computing sqrt of 25 to be 5.00002
+Computing sqrt of 25 to be 5
+Computing sqrt of 25 to be 5
+Computing sqrt of 25 to be 5
+Computing sqrt of 25 to be 5
+Computing sqrt of 25 to be 5
+[       OK ] mysqrtTests.returns5With25PassedIn (0 ms)
+[ RUN      ] mysqrtTests.returns0WithNegativePassedIn
+[       OK ] mysqrtTests.returns0WithNegativePassedIn (0 ms)
+[ RUN      ] mysqrtTests.returns10With100PassedIn
+Computing sqrt of 100 to be 50.5
+Computing sqrt of 100 to be 26.2401
+Computing sqrt of 100 to be 15.0255
+Computing sqrt of 100 to be 10.8404
+Computing sqrt of 100 to be 10.0326
+Computing sqrt of 100 to be 10.0001
+Computing sqrt of 100 to be 10
+Computing sqrt of 100 to be 10
+Computing sqrt of 100 to be 10
+Computing sqrt of 100 to be 10
+[       OK ] mysqrtTests.returns10With100PassedIn (0 ms)
+[ RUN      ] mysqrtTests.returns212With44944PassedIn
+Computing sqrt of 44944 to be 22472.5
+Computing sqrt of 44944 to be 11237.2
+Computing sqrt of 44944 to be 5620.62
+Computing sqrt of 44944 to be 2814.31
+Computing sqrt of 44944 to be 1415.14
+Computing sqrt of 44944 to be 723.45
+Computing sqrt of 44944 to be 392.787
+Computing sqrt of 44944 to be 253.605
+Computing sqrt of 44944 to be 215.413
+Computing sqrt of 44944 to be 212.027
+[       OK ] mysqrtTests.returns212With44944PassedIn (0 ms)
+[----------] 4 tests from mysqrtTests (0 ms total)
+
+[----------] 1 test from mysqrtvectorTests
+[ RUN      ] mysqrtvectorTests.mysqrtvector01
+Computing sqrt of 1 to be 1
+Computing sqrt of 1 to be 1
+Computing sqrt of 1 to be 1
+Computing sqrt of 1 to be 1
+Computing sqrt of 1 to be 1
+Computing sqrt of 1 to be 1
+Computing sqrt of 1 to be 1
+Computing sqrt of 1 to be 1
+Computing sqrt of 1 to be 1
+Computing sqrt of 1 to be 1
+Computing sqrt of 4 to be 2.5
+Computing sqrt of 4 to be 2.05
+Computing sqrt of 4 to be 2.00061
+Computing sqrt of 4 to be 2
+Computing sqrt of 4 to be 2
+Computing sqrt of 4 to be 2
+Computing sqrt of 4 to be 2
+Computing sqrt of 4 to be 2
+Computing sqrt of 4 to be 2
+Computing sqrt of 4 to be 2
+Computing sqrt of 9 to be 5
+Computing sqrt of 9 to be 3.4
+Computing sqrt of 9 to be 3.02353
+Computing sqrt of 9 to be 3.00009
+Computing sqrt of 9 to be 3
+Computing sqrt of 9 to be 3
+Computing sqrt of 9 to be 3
+Computing sqrt of 9 to be 3
+Computing sqrt of 9 to be 3
+Computing sqrt of 9 to be 3
+Computing sqrt of 16 to be 8.5
+Computing sqrt of 16 to be 5.19118
+Computing sqrt of 16 to be 4.13666
+Computing sqrt of 16 to be 4.00226
+Computing sqrt of 16 to be 4
+Computing sqrt of 16 to be 4
+Computing sqrt of 16 to be 4
+Computing sqrt of 16 to be 4
+Computing sqrt of 16 to be 4
+Computing sqrt of 16 to be 4
+Computing sqrt of 25 to be 13
+Computing sqrt of 25 to be 7.46154
+Computing sqrt of 25 to be 5.40603
+Computing sqrt of 25 to be 5.01525
+Computing sqrt of 25 to be 5.00002
+Computing sqrt of 25 to be 5
+Computing sqrt of 25 to be 5
+Computing sqrt of 25 to be 5
+Computing sqrt of 25 to be 5
+Computing sqrt of 25 to be 5
+[       OK ] mysqrtvectorTests.mysqrtvector01 (0 ms)
+[----------] 1 test from mysqrtvectorTests (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 5 tests from 2 test suites ran. (0 ms total)
+[  PASSED  ] 5 tests.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"run-test-dspack" end time: Dec 11 17:16 EST
+"run-test-dspack" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Dec 11 17:16 EST
