@@ -1,3 +1,5 @@
 .idea/
 .vscode/
 external/
+build/
+dist/

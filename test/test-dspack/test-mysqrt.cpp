@@ -27,7 +27,8 @@ TEST(mysqrtTests, returns212With44944PassedIn)
 {
     double result;
     result = mysqrt(44944.0);
-    EXPECT_EQ(212.02703422038516, result);
+    result = round(result, 2);
+    EXPECT_EQ(212.03, result);
 }
 
 TEST(mysqrtvectorTests, mysqrtvector01)
