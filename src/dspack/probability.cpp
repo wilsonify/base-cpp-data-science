@@ -44,19 +44,12 @@ double uniform_cdf(double x, double a = 0, double b = 1)
 
 double normal_pdf(double x, double mu = 0.0, double sigma = 1.0)
 {
-     double sqrt_two_pi;
-     double numerator;
-     double denominator;
-     double first_term;
-     double second_term;
-     double exp_term;
-     sqrt_two_pi = std::sqrt(2 * M_PI);
-     exp_term = std::exp(mu - x);
-     first_term = std::pow(exp_term, 2.0);
-     second_term = 2.0 / std::pow(sigma, 2.0);
-     numerator = first_term / second_term;
-     denominator = sqrt_two_pi * sigma;
-     return numerator / denominator;
+     double num;
+     double denom;
+     num=std::exp(-std::pow((x - mu),2) / 2.0 / std::pow(sigma,2));
+     denom=std::sqrt(2 * M_PI) * sigma;
+     return num / denom;
+
 }
 
 double normal_cdf(double x, double mu = 0.0, double sigma = 1.0)
@@ -68,7 +61,7 @@ double inverse_normal_cdf(double p, double mu = 0, double sigma = 1, double tole
 {
      /* find approximate inverse using binary search */
      // if not standard, compute standard and rescale
-     if (mu != 0 || sigma != 1)
+     if (mu != 0 | sigma != 1)
      {
           return mu + sigma * inverse_normal_cdf(p, tolerance = tolerance);
      }

@@ -38,7 +38,7 @@ TEST(strengthvectorTests, strengthvectorTests01)
 {
     std::vector<double> result;
     result = strength_vector({1, 4, 9, 16, 25}, {25, 25, 25, 25, 25});
-    result = round_vector(result);
+    result = round_vector(result,2);
 
-    EXPECT_THAT(result, testing::ElementsAre(1, 2, 3, 4, 5));
+    EXPECT_THAT(result, testing::ElementsAre(24.98, 6.25, 2.78, 0, 0));
 }
