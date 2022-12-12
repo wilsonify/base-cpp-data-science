@@ -1,98 +1,123 @@
 #include <gtest/gtest.h>
 #include "dspack.h"
 
-TEST(smokeTest, BasicAssertion) {
+TEST(smokeTest, BasicAssertion)
+{
     EXPECT_EQ(7 * 6, 42);
 }
 
-TEST(test_random_normal, test_random_normal01)
-{
-    double result;
-    result = random_normal();
-    EXPECT_GT(result,0);
-    EXPECT_LT(result,1);
-}
 TEST(test_bernoulli_trial, test_bernoulli_trial01)
 {
     double result;
     result = bernoulli_trial(0.5);
-    EXPECT_GE(0, result);
-    EXPECT_LE(1, result);
+    EXPECT_GE(result, 0.0);
+    EXPECT_LE(result, 1.0 );
 }
 
-
-TEST(test_binomial, test_binomial01)
+TEST(test_binomial_pmf, binomial_pmf01)
 {
-    //(1, 120, pytest.approx(120, abs=0.01))
     double result;
-    result = binomial(1,120);
-    result = round(result, 0);
-    EXPECT_EQ(120, result);
+    result = binomial_pmf(10,20,0.5);
+    result = round(result, 2);
+    EXPECT_EQ(0.18, result);
 }
-TEST(test_binomial, test_binomial02)
+TEST(test_binomial_pmf, binomial_pmf02)
 {
-    //(1, 1, pytest.approx(1, abs=0.01))
     double result;
-    result = binomial(1,1);
-    result = round(result, 0);
-    EXPECT_EQ(1, result);
+    result = binomial_pmf(15,20,0.7);
+    result = round(result, 2);
+    EXPECT_EQ(0.18, result);
 }
-TEST(test_binomial, test_binomial03)
+TEST(test_binomial_cdf, binomial_cdf01)
 {
-    //(0.2, 100, pytest.approx(20, abs=10))
     double result;
-    result = binomial(0.2,100);
-    result = round(result, 0);
-    EXPECT_EQ(20, result);
+    result = binomial_cdf(10,20,0.5);
+    result = round(result, 2);
+    EXPECT_EQ(0.59, result);
 }
-TEST(test_binomial, test_binomial04)
+TEST(test_binomial_cdf, binomial_cdf02)
 {
-    //(0, 120, pytest.approx(0, abs=0.01))
     double result;
-    result = binomial(0, 120);
-    result = round(result, 0);
-    EXPECT_EQ(0, result);
+    result = binomial_cdf(15,20,0.7);
+    result = round(result, 2);
+    EXPECT_EQ(0.76, result);
 }
 
 TEST(test_inverse_normal_cdf, test_inverse_normal_cdf01)
 {
     //(0.01, 100, 5, pytest.approx(88.36, abs=0.01))
     double result;
-    result = inverse_normal_cdf(0.01, 100, 5);
+    result = inverse_normal_cdf(0.01); //, 100, 5);
     result = round(result, 2);
-    EXPECT_EQ(88.36, result);
+    EXPECT_EQ(-2.33, result);
 }
 
 TEST(test_inverse_normal_cdf, test_inverse_normal_cdf02)
 {
     //(0.10, 100, 5, pytest.approx(93.59, abs=0.01)),
     double result;
-    result = inverse_normal_cdf(0.10, 100, 5);
+    result = inverse_normal_cdf(0.10); //, 100, 5);
     result = round(result, 2);
-    EXPECT_EQ(93.59, result);
+    EXPECT_EQ(-1.28, result);
 }
 
 TEST(test_inverse_normal_cdf, test_inverse_normal_cdf03)
 {
     //(0.5, 100, 5, pytest.approx(100, abs=0.01)),
     double result;
-    result = inverse_normal_cdf(0.5, 100, 5);
+    result = inverse_normal_cdf(0.5); //, 100, 5);
     result = round(result, 2);
-    EXPECT_EQ(100, result);
+    EXPECT_EQ(0.0, result);
 }
 
 TEST(test_inverse_normal_cdf, test_inverse_normal_cdf04)
 {
     //(0.95, 100, 5, pytest.approx(108, abs=1))
     double result;
-    result = inverse_normal_cdf(0.95, 100);
+    result = inverse_normal_cdf(0.95); //, 100);
     result = round(result, 2);
-    EXPECT_EQ(108, result);
+    EXPECT_EQ(1.64, result);
+}
+
+TEST(test_inverse_normal_cdf, test_inverse_normal_cdf05)
+{
+    //(0.01, 100, 5, pytest.approx(88.36, abs=0.01))
+    double result;
+    result = inverse_normal_cdf(0.01, 100.0, 5);
+    result = round(result, 2);
+    EXPECT_EQ(88.37, result);
+}
+
+TEST(test_inverse_normal_cdf, test_inverse_normal_cdf06)
+{
+    //(0.10, 100, 5, pytest.approx(93.59, abs=0.01)),
+    double result;
+    result = inverse_normal_cdf(0.10, 100.0, 5);
+    result = round(result, 2);
+    EXPECT_EQ(93.59, result);
+}
+
+TEST(test_inverse_normal_cdf, test_inverse_normal_cdf07)
+{
+    //(0.5, 100, 5, pytest.approx(100, abs=0.01)),
+    double result;
+    result = inverse_normal_cdf(0.5, 100, 5);
+    result = round(result, 2);
+    EXPECT_EQ(100.0, result);
+}
+
+TEST(test_inverse_normal_cdf, test_inverse_normal_cdf08)
+{
+    //(0.95, 100, 5, pytest.approx(108, abs=1))
+    double result;
+    result = inverse_normal_cdf(0.95, 100, 5);
+    result = round(result, 2);
+    EXPECT_EQ(108.22, result);
 }
 
 TEST(test_normal_cdf, test_normal_cdf01)
 {
-//(0.1, 100, 5, pytest.approx(0, abs=0.01))
+    //(0.1, 100, 5, pytest.approx(0, abs=0.01))
     double result;
     result = normal_cdf(0.1, 100, 5);
     result = round(result, 2);
@@ -100,7 +125,7 @@ TEST(test_normal_cdf, test_normal_cdf01)
 }
 TEST(test_normal_cdf, test_normal_cdf02)
 {
-// (95, 100, 5, pytest.approx(0.16, abs=0.01)),
+    // (95, 100, 5, pytest.approx(0.16, abs=0.01)),
     double result;
     result = normal_cdf(95, 100, 5);
     result = round(result, 2);
@@ -108,7 +133,7 @@ TEST(test_normal_cdf, test_normal_cdf02)
 }
 TEST(test_normal_cdf, test_normal_cdf03)
 {
-// (100, 100, 5, pytest.approx(0.5, abs=0.01)),
+    // (100, 100, 5, pytest.approx(0.5, abs=0.01)),
     double result;
     result = normal_cdf(100, 100, 5);
     result = round(result, 2);
@@ -116,7 +141,7 @@ TEST(test_normal_cdf, test_normal_cdf03)
 }
 TEST(test_normal_cdf, test_normal_cdf04)
 {
-// (105, 100, 5, pytest.approx(0.84, abs=1))
+    // (105, 100, 5, pytest.approx(0.84, abs=1))
     double result;
     result = normal_cdf(105, 100, 5);
     result = round(result, 2);
@@ -132,7 +157,7 @@ TEST(test_normal_pdf, test_normal_pdf01)
 }
 TEST(test_normal_pdf, test_normal_pdf02)
 {
-// (95, 100, 5, pytest.approx(0.05, abs=0.01))
+    // (95, 100, 5, pytest.approx(0.05, abs=0.01))
     double result;
     result = normal_pdf(95, 100, 5);
     result = round(result, 2);
@@ -140,7 +165,7 @@ TEST(test_normal_pdf, test_normal_pdf02)
 }
 TEST(test_normal_pdf, test_normal_pdf03)
 {
-// (100, 100, 5, pytest.approx(0.08, abs=0.01))
+    // (100, 100, 5, pytest.approx(0.08, abs=0.01))
     double result;
     result = normal_pdf(100, 100, 5);
     result = round(result, 2);
@@ -148,7 +173,7 @@ TEST(test_normal_pdf, test_normal_pdf03)
 }
 TEST(test_normal_pdf, test_normal_pdf04)
 {
-// (105, 100, 5, pytest.approx(0.84, abs=1))
+    // (105, 100, 5, pytest.approx(0.84, abs=1))
     double result;
     result = normal_pdf(105, 100, 5);
     result = round(result, 2);
@@ -224,3 +249,8 @@ TEST(test_uniform_pdf, test_uniform_pdf04)
     result = round(result, 2);
     EXPECT_EQ(0.0, result);
 }
+
+// TEST(test_random_normal, test_random_normal01)
+// {
+//     random_normal();
+// }

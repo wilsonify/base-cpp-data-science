@@ -3,6 +3,8 @@
 #include <assert.h>
 #include <string>
 #include <vector>
+#include <iostream>
+#include <string_view>
 
 std::string random_kid()
 {
@@ -46,10 +48,9 @@ double normal_pdf(double x, double mu = 0.0, double sigma = 1.0)
 {
      double num;
      double denom;
-     num=std::exp(-std::pow((x - mu),2) / 2.0 / std::pow(sigma,2));
-     denom=std::sqrt(2 * M_PI) * sigma;
+     num = std::exp(-std::pow((x - mu), 2) / 2.0 / std::pow(sigma, 2));
+     denom = std::sqrt(2 * M_PI) * sigma;
      return num / denom;
-
 }
 
 double normal_cdf(double x, double mu = 0.0, double sigma = 1.0)
@@ -61,37 +62,36 @@ double inverse_normal_cdf(double p, double mu = 0, double sigma = 1, double tole
 {
      /* find approximate inverse using binary search */
      // if not standard, compute standard and rescale
-     if (mu != 0 | sigma != 1)
-     {
-          return mu + sigma * inverse_normal_cdf(p, tolerance = tolerance);
-     }
+     bool is_centered = mu == 0;
+     bool is_scaled = sigma == 1;
+     bool is_standard = is_centered & is_scaled;
      double low_z = -10.0;
      double low_p = 0.0;
      double hi_z = 10.0;
      double hi_p = 1.0;
-     double mid_z = 0.0;
-     double mid_p = 0.5;
-     mid_z = (low_z + hi_z) / 2;
-     while (hi_z - low_z > tolerance)
+     double mid_z = (low_z + hi_z) / 2.0;
+     double mid_p = normal_cdf(mid_z);
+
+     while (std::abs(mid_p - p) > tolerance)
      {
-          mid_z = (low_z + hi_z) / 2; // consider the midpoint
-          mid_p = normal_cdf(mid_z);  // and the cdf's value there
+          mid_z = (low_z + hi_z) / 2.0; // consider the midpoint
+          mid_p = normal_cdf(mid_z);    // and the cdf's value there
           if (mid_p < p)
           {
-               // midpoint is still too low, search above it
+               // midpoint is too low, search above it
                low_z = mid_z;
                low_p = mid_p;
           }
-          else if (mid_p > p)
+          if (mid_p > p)
           {
-               // midpoint is still too high, search below it
+               // midpoint is too high, search below it
                hi_z = mid_z;
                hi_p = mid_p;
           }
-          else
-          {
-               break;
-          }
+     }
+     if (!is_standard)
+     {
+          mid_z = mu + sigma * mid_z;
      }
      return mid_z;
 }
@@ -99,7 +99,10 @@ double inverse_normal_cdf(double p, double mu = 0, double sigma = 1, double tole
 double random_normal()
 {
      /* returns a random draw from a standard normal distribution */
-     return inverse_normal_cdf(rand());
+     double x = std::rand();
+     std::cout << "x=";
+     std::cout << x;
+     return inverse_normal_cdf(x);
 }
 
 double bernoulli_trial(double p)
@@ -118,12 +121,32 @@ double bernoulli_trial(double p)
      }
 }
 
-double binomial(double p, int n)
+int factorial(int m)
+{
+     int result = m;
+     for (int i = 0; i < m; i++)
+     {
+          result *= (result - 1);
+     }
+     return result;
+}
+
+int n_choose_k(int n, int k)
+{
+     return factorial(n) / (factorial((n - k)) * (factorial(k)));
+}
+
+double binomial_pmf(int n, int k, double p)
+{
+     return n_choose_k(n, k) * std::pow(p, k) * std::pow((1 - p), (n - k));
+}
+
+double binomial_cdf(int n, int k, double p)
 {
      double result = 0.0;
      for (int i = 0; i < n; i++)
      {
-          result = result + bernoulli_trial(p);
+          result = result + binomial_pmf(i, k, p);
      }
      return result;
 }
