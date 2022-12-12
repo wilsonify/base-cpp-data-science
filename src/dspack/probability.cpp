@@ -123,10 +123,10 @@ double bernoulli_trial(double p)
 
 int factorial(int m)
 {
-     int result = m;
-     for (int i = 0; i < m; i++)
+     int result = 1;
+     for (int i = 1; i<=m; i++)
      {
-          result *= (result - 1);
+          result *= i;
      }
      return result;
 }

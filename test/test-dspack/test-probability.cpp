@@ -6,39 +6,53 @@ TEST(smokeTest, BasicAssertion)
     EXPECT_EQ(7 * 6, 42);
 }
 
+TEST(test_factorial, test_factorial01)
+{
+    double result;
+    result = factorial(10);
+    EXPECT_EQ(3628800, result);
+}
+
+TEST(test_n_choose_k, n_choose_k01)
+{
+    double result;
+    result = n_choose_k(10, 2);
+    EXPECT_EQ(45, result);
+}
+
 TEST(test_bernoulli_trial, test_bernoulli_trial01)
 {
     double result;
     result = bernoulli_trial(0.5);
     EXPECT_GE(result, 0.0);
-    EXPECT_LE(result, 1.0 );
+    EXPECT_LE(result, 1.0);
 }
 
 TEST(test_binomial_pmf, binomial_pmf01)
 {
     double result;
-    result = binomial_pmf(10,20,0.5);
+    result = binomial_pmf(10, 20, 0.5);
     result = round(result, 2);
     EXPECT_EQ(0.18, result);
 }
 TEST(test_binomial_pmf, binomial_pmf02)
 {
     double result;
-    result = binomial_pmf(15,20,0.7);
+    result = binomial_pmf(15, 20, 0.7);
     result = round(result, 2);
     EXPECT_EQ(0.18, result);
 }
 TEST(test_binomial_cdf, binomial_cdf01)
 {
     double result;
-    result = binomial_cdf(10,20,0.5);
+    result = binomial_cdf(10, 20, 0.5);
     result = round(result, 2);
     EXPECT_EQ(0.59, result);
 }
 TEST(test_binomial_cdf, binomial_cdf02)
 {
     double result;
-    result = binomial_cdf(15,20,0.7);
+    result = binomial_cdf(15, 20, 0.7);
     result = round(result, 2);
     EXPECT_EQ(0.76, result);
 }
