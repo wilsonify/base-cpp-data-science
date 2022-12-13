@@ -34,6 +34,15 @@ TEST(test_vector_subtract, test_vector_subtract02)
 }
 
 // @pytest.mark.parametrize(
+//     ("v1", "v2", "expected"), (
+//             ([1], [1], [2]),
+//             ([1, 0, 0, 1], [1, 2, 3, 4], [2, 2, 3, 5])
+//     ))
+// def test_vector_sum(v1, v2, expected):
+//     result = vector_sum([v1, v2])
+//     assert result == expected
+
+// @pytest.mark.parametrize(
 //     ("vec1", "vec2", "expected"), (
 //             ([0, 0, 0], [10, 10, 10], math.sqrt(300)),
 //             ([0, 0, 0], [-10, -10, -10], math.sqrt(300)))
@@ -147,11 +156,3 @@ TEST(test_vector_subtract, test_vector_subtract02)
 //     result = vector_mean([v1, v2])
 //     assert result == expected
 
-// @pytest.mark.parametrize(
-//     ("v1", "v2", "expected"), (
-//             ([1], [1], [2]),
-//             ([1, 0, 0, 1], [1, 2, 3, 4], [2, 2, 3, 5])
-//     ))
-// def test_vector_sum(v1, v2, expected):
-//     result = vector_sum([v1, v2])
-//     assert result == expected
