@@ -25,7 +25,7 @@ link_directories(${CMAKE_CURRENT_BINARY_DIR})
 # build a test
 FILE(GLOB testdspackSources test-dspack/*.cpp)
 add_executable(test-dspack ${testdspackSources} )
-target_link_libraries(test-dspack gtest gtest_main dspack)
+target_link_libraries(test-dspack gtest_main gtest gmock dspack)
 
 enable_testing ()
 add_test(run-test-dspack test-dspack)
