@@ -6,20 +6,27 @@ std::vector<double> vector_add(std::vector<double> v, std::vector<double> w)
 {
     /* adds two vectors componentwise */
     std::vector<double> result;
-    assert (v.size()==w.size());
+    assert(v.size() == w.size());
     result.resize(v.size());
-    for(int i = 0; i < v.size(); i++)
+    for (int i = 0; i < v.size(); i++)
     {
         result[i] = v[i] + w[i];
     }
-    return result; 
+    return result;
 }
 
-// std::vector<double> vector_subtract(std::vector<double> v, std::vector<double> w)
-// {
-//     /* subtracts two vectors componentwise */
-//     return [v_i - w_i for v_i, w_i in zip(v, w)]
-// }
+std::vector<double> vector_subtract(std::vector<double> v, std::vector<double> w)
+{
+    /* subtracts two vectors componentwise */
+    std::vector<double> result;
+    assert(v.size() == w.size());
+    result.resize(v.size());
+    for (int i = 0; i < v.size(); i++)
+    {
+        result[i] = v[i] - w[i];
+    }
+    return result;
+}
 
 // std::vector<double> vector_sum(std::vector<std::vector<double>> vectors){
 //     return reduce(vector_add, vectors)}

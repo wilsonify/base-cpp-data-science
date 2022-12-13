@@ -19,6 +19,20 @@ TEST(test_vector_add, test_vector_add02)
     EXPECT_THAT(result, testing::ElementsAre(2, 2, 3, 5));
 }
 
+TEST(test_vector_subtract, test_vector_subtract01)
+{
+    //([1], [1], [0])
+    auto result = vector_subtract({1}, {1});
+    EXPECT_THAT(result, testing::ElementsAre(0));
+}
+
+TEST(test_vector_subtract, test_vector_subtract02)
+{
+    //([1, 0, 0, 1], [1, 2, 3, 4], [0, -2, -3, -3])
+    auto result = vector_subtract({1, 0, 0, 1}, {1, 2, 3, 4});
+    EXPECT_THAT(result, testing::ElementsAre(0, -2, -3, -3));
+}
+
 // @pytest.mark.parametrize(
 //     ("vec1", "vec2", "expected"), (
 //             ([0, 0, 0], [10, 10, 10], math.sqrt(300)),
@@ -131,15 +145,6 @@ TEST(test_vector_add, test_vector_add02)
 //     ))
 // def test_vector_mean(v1, v2, expected):
 //     result = vector_mean([v1, v2])
-//     assert result == expected
-
-// @pytest.mark.parametrize(
-//     ("v1", "v2", "expected"), (
-//             ([1], [1], [0]),
-//             ([1, 0, 0, 1], [1, 2, 3, 4], [0, -2, -3, -3])
-//     ))
-// def test_vector_subtract(v1, v2, expected):
-//     result = vector_subtract(v1, v2)
 //     assert result == expected
 
 // @pytest.mark.parametrize(

@@ -1,5 +1,9 @@
+#include <cmath>
+#include <vector>
+#include <cassert>
+
 std::vector<double> vector_add(std::vector<double> v, std::vector<double> w);
-// std::vector<double> vector_subtract(std::vector<double> v, std::vector<double> w);
+std::vector<double> vector_subtract(std::vector<double> v, std::vector<double> w);
 // std::vector<double> vector_sum(std::vector<std::vector<double>> vectors);
 // std::vector<double> scalar_multiply(double c, std::vector<double> v);
 // double vector_mean(std::vector<std::vector<double>> vectors);
