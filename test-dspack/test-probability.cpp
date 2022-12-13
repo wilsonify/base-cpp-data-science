@@ -31,30 +31,30 @@ TEST(test_bernoulli_trial, test_bernoulli_trial01)
 TEST(test_binomial_pmf, binomial_pmf01)
 {
     double result;
-    result = binomial_pmf(10, 20, 0.5);
+    result = binomial_pmf(1, 1, 0.5);
     result = round(result, 2);
-    EXPECT_EQ(0.18, result);
+    EXPECT_EQ(0.5, result);
 }
 TEST(test_binomial_pmf, binomial_pmf02)
 {
     double result;
-    result = binomial_pmf(15, 20, 0.7);
-    result = round(result, 2);
-    EXPECT_EQ(0.18, result);
+    result = binomial_pmf(2, 10, 0.5);
+    result = round(result, 4);
+    EXPECT_EQ(0.0439, result);
 }
 TEST(test_binomial_cdf, binomial_cdf01)
 {
     double result;
-    result = binomial_cdf(10, 20, 0.5);
+    result = binomial_cdf(1,1, 0.5);
     result = round(result, 2);
-    EXPECT_EQ(0.59, result);
+    EXPECT_EQ(0.50, result);
 }
 TEST(test_binomial_cdf, binomial_cdf02)
 {
     double result;
-    result = binomial_cdf(15, 20, 0.7);
-    result = round(result, 2);
-    EXPECT_EQ(0.76, result);
+    result = binomial_cdf(1, 2, 0.5);
+    result = round(result, 4);
+    EXPECT_EQ(0.75, result);
 }
 
 TEST(test_inverse_normal_cdf, test_inverse_normal_cdf01)

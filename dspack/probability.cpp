@@ -124,7 +124,7 @@ double bernoulli_trial(double p)
 int factorial(int m)
 {
      int result = 1;
-     for (int i = 1; i<=m; i++)
+     for (int i = 1; i <= m; i++)
      {
           result *= i;
      }
@@ -136,17 +136,25 @@ int n_choose_k(int n, int k)
      return factorial(n) / (factorial((n - k)) * (factorial(k)));
 }
 
-double binomial_pmf(int n, int k, double p)
+double binomial_pmf(int k, int n, double p)
 {
-     return n_choose_k(n, k) * std::pow(p, k) * std::pow((1 - p), (n - k));
+     /*k successes in n trials at p, probability of success */
+     double q = 1.0 - p;
+     int f = n - k;
+     int combos = n_choose_k(n, k);
+     double successes = std::pow(p, k);
+     double failures = std::pow(q, f);
+     double result = combos * successes * failures;
+     return result;
 }
 
-double binomial_cdf(int n, int k, double p)
+double binomial_cdf(int k, int n, double p)
 {
+     /*k or fewer successes in n trials at p probability of success*/
      double result = 0.0;
-     for (int i = 0; i < n; i++)
+     for (int i = 0; i <= k; i++)
      {
-          result = result + binomial_pmf(i, k, p);
+          result = result + binomial_pmf(i, n, p);
      }
      return result;
 }
