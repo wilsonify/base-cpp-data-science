@@ -1,5 +1,6 @@
 .idea/
 .vscode/
+.codelite/
 external/
 build/
 dist/

@@ -17,13 +17,13 @@ link_directories(external/googletest/build/lib)
 
 # build a shared library
 include_directories(include)
-include_directories(src/dspack)
-FILE(GLOB dspackSources src/dspack/*.cpp)
+include_directories(dspack)
+FILE(GLOB dspackSources dspack/*.cpp)
 add_library(dspack SHARED ${dspackSources})
 link_directories(${CMAKE_CURRENT_BINARY_DIR})
 
 # build a test
-FILE(GLOB testdspackSources test/test-dspack/*.cpp)
+FILE(GLOB testdspackSources test-dspack/*.cpp)
 add_executable(test-dspack ${testdspackSources} )
 target_link_libraries(test-dspack gtest gtest_main dspack)
 
