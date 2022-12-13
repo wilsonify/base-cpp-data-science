@@ -2,9 +2,21 @@
 #include "gmock/gmock-matchers.h"
 #include "dspack.h"
 
-TEST(smokeTest, BasicAssertion)
+TEST(smokeTestLA, BasicAssertionLA)
 {
     EXPECT_EQ(7 * 6, 42);
+}
+TEST(test_vector_add, test_vector_add01)
+{
+    //([1], [1], [2]),
+    auto result = vector_add({1}, {1});
+    EXPECT_THAT(result, testing::ElementsAre(2));
+}
+TEST(test_vector_add, test_vector_add02)
+{
+    //([1, 0, 0, 1], [1, 2, 3, 4], [2, 2, 3, 5])
+    auto result = vector_add({1, 0, 0, 1}, {1, 2, 3, 4});
+    EXPECT_THAT(result, testing::ElementsAre(2, 2, 3, 5));
 }
 
 // @pytest.mark.parametrize(
@@ -110,15 +122,6 @@ TEST(smokeTest, BasicAssertion)
 //     ))
 // def test_sum_of_squares(v1, expected):
 //     result = sum_of_squares(v1)
-//     assert result == expected
-
-// @pytest.mark.parametrize(
-//     ("v1", "v2", "expected"), (
-//             ([1], [1], [2]),
-//             ([1, 0, 0, 1], [1, 2, 3, 4], [2, 2, 3, 5])
-//     ))
-// def test_vector_add(v1, v2, expected):
-//     result = vector_add(v1, v2)
 //     assert result == expected
 
 // @pytest.mark.parametrize(
