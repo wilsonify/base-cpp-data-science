@@ -47,7 +47,7 @@ TEST(test_binomial_cdf, binomial_cdf01)
     double result;
     result = binomial_cdf(1,1, 0.5);
     result = round(result, 2);
-    EXPECT_EQ(0.50, result);
+    EXPECT_EQ(1.0, result);
 }
 TEST(test_binomial_cdf, binomial_cdf02)
 {
