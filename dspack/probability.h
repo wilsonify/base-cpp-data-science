@@ -13,5 +13,5 @@ double inverse_normal_cdf(double p, double mu = 0, double sigma = 1, double tole
 double bernoulli_trial(double p);
 int factorial(int m);
 int n_choose_k(int n, int k);
-double binomial_pmf(int n, int k, double p);
-double binomial_cdf(int n, int k, double p);
+double binomial_pmf(int k, int n, double p);
+double binomial_cdf(int k, int n, double p);
