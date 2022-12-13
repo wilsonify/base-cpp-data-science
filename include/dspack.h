@@ -2,3 +2,4 @@
 #include "round.h"
 #include "strength.h"
 #include "probability.h"
+#include "linear_algebra.h"
