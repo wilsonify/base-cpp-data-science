@@ -12,6 +12,7 @@ TEST(test_vector_add, test_vector_add01)
     std::vector<double> result = vector_add({1}, {1});
     EXPECT_THAT(result, testing::ElementsAre(2));
 }
+
 TEST(test_vector_add, test_vector_add02)
 {
     //([1, 0, 0, 1], [1, 2, 3, 4], [2, 2, 3, 5])
@@ -179,56 +180,74 @@ TEST(test_distance, test_distance02)
     EXPECT_EQ(result, 19.05);
 }
 
-// def test_sum_of_squares(v1, expected):
-//     result = sum_of_squares(v1)
-//     assert result == expected
+TEST(test_shape, test_shape01)
+{
+    std::pair<double, double> result = shape({{1, 1, 1}, {-10, -10, -10}});
+    EXPECT_EQ(result.first, 2);
+    EXPECT_EQ(result.second, 3);
+}
 
-// @pytest.mark.parametrize(
-//     ("mat1", "col", "expected"), (
-//             ([[1, 2, 3]], 0, [1]),
-//             ([[1, 2, 3]], 2, [3]))
-// )
-// def test_get_column(mat1, col, expected):
-//     result = get_column(mat1, col)
-//     assert result == expected
+TEST(test_get_row, test_get_row01)
+{
+    std::vector<double> result = get_row({{1, 1, 1}, {-10, -10, -10}}, 0);
+    EXPECT_THAT(result, testing::ElementsAre(1, 1, 1));
+}
 
-// @pytest.mark.parametrize(
-//     ("mat1", "row", "expected"), (
-//             ([[1], [2], [3]], 0, [1]),
-//             ([[1], [2], [3]], 2, [3]))
-// )
-// def test_get_row(mat1, row, expected):
-//     result = get_row(mat1, row)
-//     assert result == expected
+TEST(test_get_row, test_get_row02)
+{
 
-// @pytest.mark.parametrize(
-//     ("i", "j", "expected"), (
-//             (1, 1, True),
-//             (1, 2, False))
-// )
-// def test_is_diagonal(i, j, expected):
-//     result = is_diagonal(i, j)
-//     assert result == expected
+    // ([[1], [2], [3]], 0, [1]),
+    std::vector<double> result = get_row({{1}, {2}, {3}}, 0);
+    EXPECT_THAT(result, testing::ElementsAre(1));
+}
+TEST(test_get_row, test_get_row03)
+{
+    // ([[1], [2], [3]], 2, [3]))
+    std::vector<double> result = get_row({{1}, {2}, {3}}, 2);
+    EXPECT_THAT(result, testing::ElementsAre(3));
+}
 
-// @pytest.mark.parametrize(
-//     ("n", "m", "expected"), (
-//             (1, 1, [[1]]),
-//             (3, 3, [[1, 0, 0], [0, 1, 0], [0, 0, 1]])
-//     ))
-// def test_make_matrix(n, m, expected):
-//     result = make_matrix(n, m, is_diagonal)
-//     assert result == expected
+TEST(test_get_column, test_get_column01)
+{
+    std::vector<double> result = get_column({{1, 1, 1}, {-10, -10, -10}}, 0);
+    EXPECT_THAT(result, testing::ElementsAre(1, -10));
+}
 
-// @pytest.mark.parametrize(
-//     ("mat1", "mat2", "expected"), (
-//             ([[1]], [[1]], [[2]]),
-//             ([[1, 0], [0, 1]], [[1, 2], [3, 4]], [[2, 2], [3, 5]])
-//     ))
-// def test_matrix_add(mat1, mat2, expected):
-//     result = matrix_add(mat1, mat2)
-//     assert result == expected
+TEST(test_get_column, test_get_column02)
+{
+    // ([[1, 2, 3]], 0, [1]),
+    std::vector<double> result = get_column({{1, 2, 3}}, 0);
+    EXPECT_THAT(result, testing::ElementsAre(1));
+}
+TEST(test_get_column, test_get_column03)
+{
+    // ([[1, 2, 3]], 2, [3]))
+    std::vector<double> result = get_column({{1, 2, 3}}, 2);
+    EXPECT_THAT(result, testing::ElementsAre(3));
+}
 
-// def test_shape(random_matrix):
-//     num_rows, num_columns = shape(random_matrix)
-//     assert num_rows == 100
-//     assert num_columns == 4
+TEST(test_make_matrix, test_make_matrix01)
+{
+    // 5x5 identity matrix
+    std::vector<std::vector<double>> result = make_matrix(5, 5, is_diagonal);
+    EXPECT_THAT(result[0], testing::ElementsAre(1, 0, 0, 0, 0));
+    EXPECT_THAT(result[1], testing::ElementsAre(0, 1, 0, 0, 0));
+    EXPECT_THAT(result[2], testing::ElementsAre(0, 0, 1, 0, 0));
+    EXPECT_THAT(result[3], testing::ElementsAre(0, 0, 0, 1, 0));
+    EXPECT_THAT(result[4], testing::ElementsAre(0, 0, 0, 0, 1));
+}
+
+TEST(test_matrix_add, test_matrix_add01)
+{
+    //([[1]], [[1]], [[2]])
+    std::vector<std::vector<double>> result = matrix_add({{1}}, {{1}});
+    EXPECT_THAT(result[0], testing::ElementsAre(2));
+}
+TEST(test_matrix_add, test_matrix_add02)
+{
+
+    // ([[1, 0], [0, 1]], [[1, 2], [3, 4]], [[2, 2], [3, 5]])
+    std::vector<std::vector<double>> result = matrix_add({{1, 0}, {0, 1}}, {{1, 2}, {3, 4}});
+    EXPECT_THAT(result[0], testing::ElementsAre(2,2));
+    EXPECT_THAT(result[1], testing::ElementsAre(3,5));
+}

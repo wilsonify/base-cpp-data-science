@@ -2,6 +2,7 @@
 #include <vector>
 #include <cassert>
 #include <numeric>
+#include <functional>
 
 std::vector<double> vector_add(std::vector<double> v, std::vector<double> w)
 {
@@ -102,51 +103,73 @@ double distance(std::vector<double> v, std::vector<double> w)
     return std::sqrt(squared_distance(v, w));
 }
 
-// std::pair<double, double> shape(std::vector<std::vector<double>> a_matrix)
-// {
-//     num_rows = len(a_matrix)
-//         num_cols = len(a_matrix[0]) if a_matrix else 0 return num_rows,
-//     num_cols
-// }
+std::pair<double, double> shape(std::vector<std::vector<double>> a_matrix)
+{
+    double num_rows = a_matrix.size();
+    double num_cols = 0;
+    if (num_rows > 0)
+    {
+        num_cols = a_matrix[0].size();
+    }
+    return {num_rows, num_cols};
+}
 
-// std::vector<double> get_row(std::vector<std::vector<double>> a_matrix, double i){
-//     return a_matrix[i]}
+std::vector<double> get_row(std::vector<std::vector<double>> a_matrix, double i)
+{
+    return a_matrix[i];
+}
 
-// std::vector<double> get_column(std::vector<std::vector<double>> a_matrix, double j)
-// {
-//     return [A_i[j] for A_i in a_matrix]
-// }
+std::vector<double> get_column(std::vector<std::vector<double>> a_matrix, double j)
+{
+    std::vector<double> result;
+    result.resize(a_matrix.size());
 
-// std::vector<std::vector<double>> make_matrix(double num_rows, double num_cols, entry_fn)
-// {
-//     // returns a num_rows x num_cols matrix whose (i,j)-th entry is entry_fn(i, j)
-//     return [
-//         [entry_fn(i, j) for j in range(num_cols)] for i in range(num_rows);
-//         ]
-// }
+    for (int i = 0; i < a_matrix.size(); i++)
+    {
+        result[i] = a_matrix[i][j];
+    }
 
-// bool is_diagonal(double i, double j)
-// {
-//     // 1s on the diagonal, 0s everywhere else
-//     return 1 if i == j else 0
-// }
+    return result;
+}
 
-// identity_matrix = make_matrix(5, 5, is_diagonal)
+std::vector<std::vector<double>> make_matrix(double num_rows, double num_cols, std::function<double(int, int)> entry_fn)
+{
+    // returns a num_rows x num_cols matrix whose (i,j)-th entry is entry_fn(i, j)
+    std::vector<std::vector<double>> result;
+    result.resize(num_rows);
+    for (int i = 0; i < num_rows; i++)
+    {
+        result[i].resize(num_cols);
+        for (int j = 0; j < num_cols; j++)
+        {
+            result[i][j] = entry_fn(i, j);
+        }
+    }
+    return result;
+}
 
-//     std::vector<std::vector<double>>
-//     matrix_add(std::vector<std::vector<double>> a_matrix, std::vector<std::vector<double>> b_matrix)
-// {
-//     if shape (a_matrix)
-//         != shape(b_matrix) : raise ArithmeticError("cannot add matrices with different shapes")
+bool is_diagonal(int i, int j)
+{
+    // 1s on the diagonal, 0s everywhere else
+    return i == j;
+}
 
-//                                  num_rows,
-//         num_cols = shape(a_matrix)
-
-//             double
-//             entry_fn(i, j)
-//         {
-//             return a_matrix[i][j] + b_matrix[i][j]
-
-//                    return make_matrix(num_rows, num_cols, entry_fn)
-//         }
-// }
+std::vector<std::vector<double>> matrix_add(std::vector<std::vector<double>> a_matrix, std::vector<std::vector<double>> b_matrix)
+{
+    assert(shape(a_matrix) == shape(b_matrix));
+    std::pair<double, double> shape_a_matrix;
+    shape_a_matrix = shape(a_matrix);
+    double num_rows = shape_a_matrix.first;
+    double num_cols = shape_a_matrix.second;
+    std::vector<std::vector<double>> result;
+    result.resize(num_rows);
+    for (int i = 0; i < num_rows; i++)
+    {
+        result[i].resize(num_cols);
+        for (int j = 0; j < num_cols; j++)
+        {
+            result[i][j] = a_matrix[i][j] + b_matrix[i][j];
+        }
+    }
+    return result;
+}
