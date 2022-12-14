@@ -33,6 +33,12 @@ TEST(test_vector_subtract, test_vector_subtract02)
     EXPECT_THAT(result, testing::ElementsAre(0, -2, -3, -3));
 }
 
+TEST(test_vector_subtract, test_vector_subtract03)
+{
+    std::vector<double> result = vector_subtract({1, 1, 1}, {10, 10, 10});
+    EXPECT_THAT(result, testing::ElementsAre(-9, -9, -9));
+}
+
 TEST(test_vector_sum, test_vector_sum01)
 {
     //([1], [1], [2])
@@ -113,6 +119,13 @@ TEST(test_sum_of_squares, test_sum_of_squares03)
     EXPECT_EQ(result, 30);
 }
 
+TEST(test_sum_of_squares, test_sum_of_squares04)
+{
+
+    double result = sum_of_squares({-9, -9, -9});
+    EXPECT_EQ(result, 243);
+}
+
 TEST(test_magnitude, test_magnitude01)
 {
     // ([10, 10, 10], math.sqrt(30)),
@@ -143,20 +156,27 @@ TEST(test_squared_distance, test_squared_distance02)
     EXPECT_EQ(result, 22.0);
 }
 
+TEST(test_squared_distance, test_squared_distance03)
+{
+    double result = squared_distance({1, 1, 1}, {10, 10, 10});
+    result = round(result, 2);
+    EXPECT_EQ(result, 243);
+}
+
 TEST(test_distance, test_distance01)
 {
     // ([0, 0, 0], [10, 10, 10], math.sqrt(30)),
-    double result = squared_distance({1,1,1}, {10, 10, 10});
+    double result = distance({1, 1, 1}, {10, 10, 10});
     result = round(result, 2);
-    EXPECT_EQ(result, 17.32);
+    EXPECT_EQ(result, 15.59);
 }
 
 TEST(test_distance, test_distance02)
 {
     // ([0, 0, 0], [-10, -10, -10], math.sqrt(30)))
-    double result = squared_distance({1, 1, 1}, {-10, -10, -10});
+    double result = distance({1, 1, 1}, {-10, -10, -10});
     result = round(result, 2);
-    EXPECT_EQ(result, 17.32);
+    EXPECT_EQ(result, 19.05);
 }
 
 // def test_sum_of_squares(v1, expected):
