@@ -6,47 +6,48 @@ TEST(smokeTestLA, BasicAssertionLA)
 {
     EXPECT_EQ(7 * 6, 42);
 }
-// TEST(test_vector_add, test_vector_add01)
-// {
-//     //([1], [1], [2]),
-//     std::vector<double> result = vector_add({1}, {1});
-//     EXPECT_THAT(result, testing::ElementsAre(2));
-// }
-// TEST(test_vector_add, test_vector_add02)
-// {
-//     //([1, 0, 0, 1], [1, 2, 3, 4], [2, 2, 3, 5])
-//     std::vector<double> result = vector_add({1, 0, 0, 1}, {1, 2, 3, 4});
-//     EXPECT_THAT(result, testing::ElementsAre(2, 2, 3, 5));
-// }
+TEST(test_vector_add, test_vector_add01)
+{
+    //([1], [1], [2]),
+    std::vector<double> result = vector_add({1}, {1});
+    EXPECT_THAT(result, testing::ElementsAre(2));
+}
+TEST(test_vector_add, test_vector_add02)
+{
+    //([1, 0, 0, 1], [1, 2, 3, 4], [2, 2, 3, 5])
+    std::vector<double> result = vector_add({1, 0, 0, 1}, {1, 2, 3, 4});
+    EXPECT_THAT(result, testing::ElementsAre(2, 2, 3, 5));
+}
 
-// TEST(test_vector_subtract, test_vector_subtract01)
-// {
-//     //([1], [1], [0])
-//     std::vector<double> result = vector_subtract({1}, {1});
-//     EXPECT_THAT(result, testing::ElementsAre(0));
-// }
+TEST(test_vector_subtract, test_vector_subtract01)
+{
+    //([1], [1], [0])
+    std::vector<double> result = vector_subtract({1}, {1});
+    EXPECT_THAT(result, testing::ElementsAre(0));
+}
 
-// TEST(test_vector_subtract, test_vector_subtract02)
-// {
-//     //([1, 0, 0, 1], [1, 2, 3, 4], [0, -2, -3, -3])
-//     std::vector<double> result = vector_subtract({1, 0, 0, 1}, {1, 2, 3, 4});
-//     EXPECT_THAT(result, testing::ElementsAre(0, -2, -3, -3));
-// }
+TEST(test_vector_subtract, test_vector_subtract02)
+{
+    //([1, 0, 0, 1], [1, 2, 3, 4], [0, -2, -3, -3])
+    std::vector<double> result = vector_subtract({1, 0, 0, 1}, {1, 2, 3, 4});
+    EXPECT_THAT(result, testing::ElementsAre(0, -2, -3, -3));
+}
 
-// TEST(test_vector_sum, test_vector_sum01)
-// {
-//     //([1], [1], [2])
-//     std::vector<double> result = vector_sum({{1}, {1}});
-//     EXPECT_EQ(result.size(), 1);
-//     EXPECT_THAT(result, testing::ElementsAre(2));
-//}
+TEST(test_vector_sum, test_vector_sum01)
+{
+    //([1], [1], [2])
+    std::vector<double> result = vector_sum({{1}, {1}});
+    EXPECT_EQ(result.size(), 1);
+    EXPECT_THAT(result, testing::ElementsAre(2));
+}
 
-// TEST(test_vector_sum, test_vector_sum02)
-// {
-//     //([1], [1], [2])
-//     std::vector<double> result = vector_sum({{1, 0, 0, 1}, {1, 2, 3, 4}});
-//     EXPECT_THAT(result, testing::ElementsAre(0, -2, -3, -3));
-// }
+TEST(test_vector_sum, test_vector_sum02)
+{
+    //([1], [1], [2])
+    std::vector<double> result = vector_sum({{1, 0, 0, 1}, {1, 2, 3, 4}});
+    EXPECT_EQ(result.size(), 4);
+    EXPECT_THAT(result, testing::ElementsAre(2,2,3,5));
+}
 
 // @pytest.mark.parametrize(
 //     ("v1", "v2", "expected"), (

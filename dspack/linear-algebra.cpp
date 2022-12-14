@@ -32,13 +32,14 @@ std::vector<double> vector_sum(std::vector<std::vector<double>> vectors)
 {
     /* reduce vectors by adding */
     std::vector<double> result;
-    result.resize(vectors.size());
-    for (int i = 0; i < vectors.size(); i++)
+
+    result.resize(vectors[0].size());
+    for (int i = 0; i < vectors[0].size(); i++)
     {
-        result[i] = 0;
-        for (int j = 0; j < vectors[i].size(); i++)
+        result[i] = 0.0;
+        for (int j = 0; j < vectors.size(); j++)
         {
-            result[i]=result[i]+vectors[i][j];
+            result[i] = result[i] + vectors[j][i];
         }
     }
     return result;
