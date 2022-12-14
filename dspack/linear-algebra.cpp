@@ -92,17 +92,15 @@ double magnitude(std::vector<double> v)
     return std::sqrt(sum_of_squares(v));
 }
 
-// double squared_distance(std::vector<double> v, std::vector<double> w)
-// {
-//     return sum_of_squares(vector_subtract(v, w))
-// }
+double squared_distance(std::vector<double> v, std::vector<double> w)
+{
+    return sum_of_squares(vector_subtract(v, w));
+}
 
-// double distance(std::vector<double> v, std::vector<double> w){
-//     return math.sqrt(squared_distance(v, w))}
-
-// //
-// // functions for working with matrices
-// //
+double distance(std::vector<double> v, std::vector<double> w)
+{
+    return std::sqrt(squared_distance(v, w));
+}
 
 // std::pair<double, double> shape(std::vector<std::vector<double>> a_matrix)
 // {

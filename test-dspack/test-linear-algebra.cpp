@@ -115,7 +115,7 @@ TEST(test_sum_of_squares, test_sum_of_squares03)
 
 TEST(test_magnitude, test_magnitude01)
 {
-    // ([10, 10, 10], math.sqrt(300)),
+    // ([10, 10, 10], math.sqrt(30)),
     double result = magnitude({10, 10, 10});
     result = round(result, 2);
     EXPECT_EQ(result, 17.32);
@@ -123,23 +123,44 @@ TEST(test_magnitude, test_magnitude01)
 
 TEST(test_magnitude, test_magnitude02)
 {
-    // ([-10, -10, -10], math.sqrt(300)))
+    // ([-10, -10, -10], math.sqrt(30)))
     double result = magnitude({-10, -10, -10});
+    result = round(result, 2);
+    EXPECT_EQ(result, 17.32);
+}
+
+TEST(test_squared_distance, test_squared_distance01)
+{
+    // ([1], [1], 0),
+    double result = squared_distance({1}, {1});
+    EXPECT_EQ(result, 0.0);
+}
+TEST(test_squared_distance, test_squared_distance02)
+{
+    // ([1, 0, 0, 1], [1, 2, 3, 4], 22)
+    double result = squared_distance({1, 0, 0, 1}, {1, 2, 3, 4});
+    result = round(result, 2);
+    EXPECT_EQ(result, 22.0);
+}
+
+TEST(test_distance, test_distance01)
+{
+    // ([0, 0, 0], [10, 10, 10], math.sqrt(30)),
+    double result = squared_distance({1,1,1}, {10, 10, 10});
+    result = round(result, 2);
+    EXPECT_EQ(result, 17.32);
+}
+
+TEST(test_distance, test_distance02)
+{
+    // ([0, 0, 0], [-10, -10, -10], math.sqrt(30)))
+    double result = squared_distance({1, 1, 1}, {-10, -10, -10});
     result = round(result, 2);
     EXPECT_EQ(result, 17.32);
 }
 
 // def test_sum_of_squares(v1, expected):
 //     result = sum_of_squares(v1)
-//     assert result == expected
-
-// @pytest.mark.parametrize(
-//     ("vec1", "vec2", "expected"), (
-//             ([0, 0, 0], [10, 10, 10], math.sqrt(300)),
-//             ([0, 0, 0], [-10, -10, -10], math.sqrt(300)))
-// )
-// def test_distance(vec1, vec2, expected):
-//     result = distance(vec1, vec2)
 //     assert result == expected
 
 // @pytest.mark.parametrize(
@@ -191,12 +212,3 @@ TEST(test_magnitude, test_magnitude02)
 //     num_rows, num_columns = shape(random_matrix)
 //     assert num_rows == 100
 //     assert num_columns == 4
-
-// @pytest.mark.parametrize(
-//     ("v1", "v2", "expected"), (
-//             ([1], [1], 0),
-//             ([1, 0, 0, 1], [1, 2, 3, 4], 22)
-//     ))
-// def test_squared_distance(v1, v2, expected):
-//     result = squared_distance(v1, v2)
-//     assert result == expected
