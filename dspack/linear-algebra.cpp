@@ -45,10 +45,16 @@ std::vector<double> vector_sum(std::vector<std::vector<double>> vectors)
     return result;
 }
 
-// std::vector<double> scalar_multiply(double c, std::vector<double> v)
-// {
-//     return [c * v_i for v_i in v]
-// }
+std::vector<double> scalar_multiply(double c, std::vector<double> v)
+{
+    std::vector<double> result;
+    result.resize(v.size());
+    for (int i = 0; i < v.size(); i++)
+    {
+        result[i] = c * v[i];
+    }
+    return result;
+}
 
 // double vector_mean(std::vector<std::vector<double>> vectors){
 //     /*compute the vector whose i-th element is the mean of the

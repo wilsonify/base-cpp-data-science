@@ -43,20 +43,26 @@ TEST(test_vector_sum, test_vector_sum01)
 
 TEST(test_vector_sum, test_vector_sum02)
 {
-    //([1], [1], [2])
+    //([1, 0, 0, 1], [1, 2, 3, 4], [2, 2, 3, 5])
     std::vector<double> result = vector_sum({{1, 0, 0, 1}, {1, 2, 3, 4}});
     EXPECT_EQ(result.size(), 4);
-    EXPECT_THAT(result, testing::ElementsAre(2,2,3,5));
+    EXPECT_THAT(result, testing::ElementsAre(2, 2, 3, 5));
+}
+TEST(test_scalar_multiply, test_scalar_multiply01)
+{
+    // ([2, 1], 1.87, [3.74, 1.87])
+    std::vector<double> result = scalar_multiply(1.87, {2,1});
+    EXPECT_EQ(result.size(), 2);
+    EXPECT_THAT(result, testing::ElementsAre(3.74, 1.87));
+}
+TEST(test_scalar_multiply, test_scalar_multiply02)
+{
+    // ([1, 2, 3, 4], 5, [5, 10, 15, 20])
+    std::vector<double> result = scalar_multiply(5.0, {1, 2, 3, 4});
+    EXPECT_EQ(result.size(), 4);
+    EXPECT_THAT(result, testing::ElementsAre(5, 10, 15, 20));
 }
 
-// @pytest.mark.parametrize(
-//     ("v1", "v2", "expected"), (
-//             ,
-//             ([1, 0, 0, 1], [1, 2, 3, 4], [2, 2, 3, 5])
-//     ))
-// def test_vector_sum(v1, v2, expected):
-//     result = vector_sum([v1, v2])
-//     assert result == expected
 
 // @pytest.mark.parametrize(
 //     ("vec1", "vec2", "expected"), (
@@ -130,14 +136,6 @@ TEST(test_vector_sum, test_vector_sum02)
 //     result = matrix_add(mat1, mat2)
 //     assert result == expected
 
-// @pytest.mark.parametrize(
-//     ("v", "c", "expected"), (
-//             ([2, 1], 1.87, [3.74, 1.87]),
-//             ([1, 2, 3, 4], 5, [5, 10, 15, 20])
-//     ))
-// def test_scalar_multiply(v, c, expected):
-//     result = scalar_multiply(c, v)
-//     assert result == expected
 
 // def test_shape(random_matrix):
 //     num_rows, num_columns = shape(random_matrix)
