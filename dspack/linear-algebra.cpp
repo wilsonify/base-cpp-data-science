@@ -28,18 +28,21 @@ std::vector<double> vector_subtract(std::vector<double> v, std::vector<double> w
     return result;
 }
 
-// std::vector<double> vector_sum(std::vector<std::vector<double>> vectors)
-// {
-//     /* reduce vectors by adding */
-//     std::vector<double> result;
-//     result.resize(vectors.size());
-
-//     for (int i = 0; i < vectors.size(); i++)
-//     {
-//         result[i] = vector_add(result[i], vectors[i])
-//     }
-//     return result;
-// }
+std::vector<double> vector_sum(std::vector<std::vector<double>> vectors)
+{
+    /* reduce vectors by adding */
+    std::vector<double> result;
+    result.resize(vectors.size());
+    for (int i = 0; i < vectors.size(); i++)
+    {
+        result[i] = 0;
+        for (int j = 0; j < vectors[i].size(); i++)
+        {
+            result[i]=result[i]+vectors[i][j];
+        }
+    }
+    return result;
+}
 
 // std::vector<double> scalar_multiply(double c, std::vector<double> v)
 // {

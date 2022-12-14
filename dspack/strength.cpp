@@ -1,5 +1,7 @@
 #include <algorithm>
 #include <vector>
+#include <cassert>
+#include "round.h"
 
 double strength(double actual, double expected)
 {
@@ -12,13 +14,13 @@ double strength(double actual, double expected)
 std::vector<double> strength_vector(std::vector<double> actual, std::vector<double> expected)
 {
     std::vector<double> result;
-    std::vector<double> input;
+    assert(expected.size() == actual.size());
     result.resize(expected.size());
-    std::transform(
-        expected.begin(), expected.end(), // interate over these
-        actual.begin(), // access corresponding from here
-        result.begin(), // save results here
-        strength
-        );
+
+    for (int i = 0; i < expected.size(); i++)
+    {
+        result[i] = strength(actual[i], expected[i]);
+        result[i] = round(result[i], 2);
+    }
     return result;
 }
