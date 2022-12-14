@@ -1,6 +1,7 @@
 #include <cmath>
 #include <vector>
 #include <cassert>
+#include <numeric>
 
 std::vector<double> vector_add(std::vector<double> v, std::vector<double> w)
 {
@@ -67,22 +68,29 @@ std::vector<double> vector_mean(std::vector<std::vector<double>> vectors)
     return scalar_multiply(c, vector_sum(vectors));
 }
 
-// std::vector<double> dot(std::vector<double> v, std::vector<double> w)
-// {
-//     /* v_1 * w_1 + ... + v_n * w_n */
-//     return sum(v_i * w_i for v_i, w_i in zip(v, w))
-// }
+double dot(std::vector<double> v, std::vector<double> w)
+{
+    /* v_1 * w_1 + ... + v_n * w_n */
+    assert(v.size() == w.size());
+    double sum_of_elements = 0.0;
+    for (int i = 0; i < v.size(); i++)
+    {
+        sum_of_elements = sum_of_elements + (v[i] * w[i]);
+    }
+    return sum_of_elements;
+}
 
-// double sum_of_squares(std::vector<double> v)
-// {
-//     /* v_1 * v_1 + ... + v_n * v_n */
-//     return dot(v, v)
-// }
+double sum_of_squares(std::vector<double> v)
+{
+    /* v_1 * v_1 + ... + v_n * v_n */
+    return dot(v, v);
+}
 
-// double magnitude(std::vector<double> v)
-// {
-//     return math.sqrt(sum_of_squares(v))
-// }
+double magnitude(std::vector<double> v)
+{
+    /* The magnitude of a vector is the absolute length of the vector, denoted as ∥a∥. */
+    return std::sqrt(sum_of_squares(v));
+}
 
 // double squared_distance(std::vector<double> v, std::vector<double> w)
 // {

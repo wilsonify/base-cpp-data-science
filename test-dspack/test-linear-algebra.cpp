@@ -79,6 +79,60 @@ TEST(test_vector_mean, test_vector_mean02)
     EXPECT_THAT(result, testing::ElementsAre(1, 1, 1.5, 2.5));
 }
 
+TEST(test_dot, test_dot01)
+{
+    // ([1, 1, 1], [10, 10, 10], 30),
+    double result = dot({1, 1, 1}, {10, 10, 10});
+    EXPECT_EQ(result, 30);
+}
+TEST(test_dot, test_dot02)
+{
+    // ([1, 1, 1], [-10, -10, -10], -30))
+    double result = dot({1, 1, 1}, {-10, -10, -10});
+    EXPECT_EQ(result, -30);
+}
+
+TEST(test_sum_of_squares, test_sum_of_squares01)
+{
+    // ([1], 1),
+    double result = sum_of_squares({1});
+    EXPECT_EQ(result, 1);
+}
+
+TEST(test_sum_of_squares, test_sum_of_squares02)
+{
+    // ([1, 0, 0, 1], 2),
+    double result = sum_of_squares({1, 0, 0, 1});
+    EXPECT_EQ(result, 2);
+}
+
+TEST(test_sum_of_squares, test_sum_of_squares03)
+{
+    // ([1, 2, 3, 4], 30)
+    double result = sum_of_squares({1, 2, 3, 4});
+    EXPECT_EQ(result, 30);
+}
+
+TEST(test_magnitude, test_magnitude01)
+{
+    // ([10, 10, 10], math.sqrt(300)),
+    double result = magnitude({10, 10, 10});
+    result = round(result, 2);
+    EXPECT_EQ(result, 17.32);
+}
+
+TEST(test_magnitude, test_magnitude02)
+{
+    // ([-10, -10, -10], math.sqrt(300)))
+    double result = magnitude({-10, -10, -10});
+    result = round(result, 2);
+    EXPECT_EQ(result, 17.32);
+}
+
+// def test_sum_of_squares(v1, expected):
+//     result = sum_of_squares(v1)
+//     assert result == expected
+
 // @pytest.mark.parametrize(
 //     ("vec1", "vec2", "expected"), (
 //             ([0, 0, 0], [10, 10, 10], math.sqrt(300)),
@@ -86,15 +140,6 @@ TEST(test_vector_mean, test_vector_mean02)
 // )
 // def test_distance(vec1, vec2, expected):
 //     result = distance(vec1, vec2)
-//     assert result == expected
-
-// @pytest.mark.parametrize(
-//     ("vec1", "vec2", "expected"), (
-//             ([1, 1, 1], [10, 10, 10], 30),
-//             ([1, 1, 1], [-10, -10, -10], -30))
-// )
-// def test_dot(vec1, vec2, expected):
-//     result = dot(vec1, vec2)
 //     assert result == expected
 
 // @pytest.mark.parametrize(
@@ -122,15 +167,6 @@ TEST(test_vector_mean, test_vector_mean02)
 // )
 // def test_is_diagonal(i, j, expected):
 //     result = is_diagonal(i, j)
-//     assert result == expected
-
-// @pytest.mark.parametrize(
-//     ("vec1", "expected"), (
-//             ([10, 10, 10], math.sqrt(300)),
-//             ([-10, -10, -10], math.sqrt(300)))
-// )
-// def test_magnitude(vec1, expected):
-//     result = magnitude(vec1)
 //     assert result == expected
 
 // @pytest.mark.parametrize(
@@ -163,14 +199,4 @@ TEST(test_vector_mean, test_vector_mean02)
 //     ))
 // def test_squared_distance(v1, v2, expected):
 //     result = squared_distance(v1, v2)
-//     assert result == expected
-
-// @pytest.mark.parametrize(
-//     ("v1", "expected"), (
-//             ([1], 1),
-//             ([1, 0, 0, 1], 2),
-//             ([1, 2, 3, 4], 30)
-//     ))
-// def test_sum_of_squares(v1, expected):
-//     result = sum_of_squares(v1)
 //     assert result == expected

@@ -9,9 +9,9 @@ std::vector<double> vector_subtract(std::vector<double> v, std::vector<double> w
 std::vector<double> vector_sum(std::vector<std::vector<double>> vectors);
 std::vector<double> scalar_multiply(double c, std::vector<double> v);
 std::vector<double> vector_mean(std::vector<std::vector<double>> vectors);
-// std::vector<double> dot(std::vector<double> v, std::vector<double> w);
-// double sum_of_squares(std::vector<double> v);
-// double magnitude(std::vector<double> v);
+double dot(std::vector<double> v, std::vector<double> w);
+double sum_of_squares(std::vector<double> v);
+double magnitude(std::vector<double> v);
 // double squared_distance(std::vector<double> v, std::vector<double> w);
 // double distance(std::vector<double> v, std::vector<double> w);
 // std::pair<double, double> shape(std::vector<std::vector<double>> a_matrix);
