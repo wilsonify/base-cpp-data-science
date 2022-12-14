@@ -27,13 +27,17 @@ FILE(GLOB testdspackSources test-dspack/*.cpp)
 add_executable(test-dspack ${testdspackSources} )
 target_link_libraries(test-dspack gtest_main gtest gmock dspack)
 
+# use ctest to run tests
 enable_testing ()
 add_test(run-test-dspack test-dspack)
 
 # build an installer
-# include (InstallRequiredSystemLibraries)
-# set (CPACK_PACKAGE_NAME "base-python-data-science")
-# set (CPACK_PACKAGE_VERSION_MAJOR "${VERSION_MAJOR}")
-# set (CPACK_PACKAGE_VERSION_MINOR "${VERSION_MINOR}")
-# set (CPACK_SOURCE_GENERATOR "TGZ")
-# include (CPack)
+include (InstallRequiredSystemLibraries)
+install(TARGETS dspack RUNTIME DESTINATION "/usr/share/lib" )
+SET(CPACK_DEBIAN_PACKAGE_MAINTAINER "wilsonify")
+SET(CPACK_PACKAGE_NAME "libdspack")
+SET(CPACK_PACKAGE_VERSION_MAJOR "${VERSION_MAJOR}")
+SET(CPACK_PACKAGE_VERSION_MINOR "${VERSION_MINOR}")
+#SET(CPACK_SOURCE_GENERATOR "TGZ")
+SET(CPACK_GENERATOR "DEB")
+INCLUDE(CPack)

@@ -1,0 +1,2 @@
+FROM dspack-base:latest
+RUN apt-get install -y cmake g++ ninja-build gfortran
