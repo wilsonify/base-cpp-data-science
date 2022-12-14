@@ -56,10 +56,16 @@ std::vector<double> scalar_multiply(double c, std::vector<double> v)
     return result;
 }
 
-// double vector_mean(std::vector<std::vector<double>> vectors){
-//     /*compute the vector whose i-th element is the mean of the
-//     i-th elements of the input vectors*/
-//     n = len(vectors) return scalar_multiply(1 / n, vector_sum(vectors))}
+std::vector<double> vector_mean(std::vector<std::vector<double>> vectors)
+{
+    /*
+    compute the vector whose i-th element is the mean of the
+    i-th elements of the input vectors
+    */
+    double n = vectors.size();
+    double c = 1 / n;
+    return scalar_multiply(c, vector_sum(vectors));
+}
 
 // std::vector<double> dot(std::vector<double> v, std::vector<double> w)
 // {
