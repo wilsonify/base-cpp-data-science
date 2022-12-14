@@ -3,3 +3,4 @@
 #include "strength.h"
 #include "probability.h"
 #include "linear-algebra.h"
+#include "stats.h"

@@ -3,6 +3,7 @@
 #include <numeric>
 #include <utility>
 #include <cassert>
+#include <functional>
 
 std::vector<double> vector_add(std::vector<double> v, std::vector<double> w);
 std::vector<double> vector_subtract(std::vector<double> v, std::vector<double> w);
