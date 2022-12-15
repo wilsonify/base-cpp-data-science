@@ -4,3 +4,4 @@
 #include "probability.h"
 #include "linear-algebra.h"
 #include "stats.h"
+#include "machine-learning.h"
