@@ -28,7 +28,11 @@ double mean(std::vector<double> x)
     double result = 0.0;
     double eps = 0.001;
     double n = x.size();
-    result = std::accumulate(x.begin(), x.end(), 0) / (n + eps);
+    for (int i = 0; i < n; i++)
+    {
+        result = result + x[i];
+    }
+    result = result / (n + eps);
     return result;
 }
 
@@ -68,10 +72,10 @@ double correlation(std::vector<double> x, std::vector<double> y)
 {
     double stdev_x = standard_deviation(x);
     double stdev_y = standard_deviation(y);
-    double result = 0;
+    double result = 0.0;
     if (stdev_x > 0 && stdev_y > 0)
     {
-        return covariance(x, y) / stdev_x / stdev_y;
+        return covariance(x, y) / (stdev_x * stdev_y);
     }
     return result;
 }
@@ -84,12 +88,14 @@ std::vector<std::vector<double>> correlation_matrix(std::vector<std::vector<doub
     std::pair<int, int> shape_data = shape(data);
     int num_rows = shape_data.first;
     int num_cols = shape_data.second;
+    int result_num_rows = shape_data.second;
+    int result_num_cols = shape_data.second;
     std::vector<std::vector<double>> result;
-    result.resize(data.size());
-    for (int i = 0; i < num_rows; i++)
+    result.resize(result_num_rows);
+    for (int i = 0; i < result_num_rows; i++)
     {
-        result[i].resize(num_cols);
-        for (int j = 0; j < num_cols; j++)
+        result[i].resize(result_num_cols);
+        for (int j = 0; j < result_num_cols; j++)
         {
             result[i][j] = correlation(get_column(data, i), get_column(data, j));
         }

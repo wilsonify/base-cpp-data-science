@@ -127,6 +127,36 @@ TEST(test_sum_of_squares, test_sum_of_squares04)
     EXPECT_EQ(result, 243);
 }
 
+TEST(test_sum_of_squares, test_sum_of_squares05)
+{
+    // ([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 385),
+    double result;
+    result = sum_of_squares({1, 2, 3, 4, 5, 6, 7, 8, 9, 10});
+    EXPECT_EQ(385, result);
+}
+TEST(test_sum_of_squares, test_sum_of_squares06)
+{
+    // ([1, 2, 3, 4, 5, 100, 123], 25184),
+    double result;
+    result = sum_of_squares({1, 2, 3, 4, 5, 100, 123});
+    EXPECT_EQ(25184.0, result);
+}
+
+TEST(test_sum_of_squares, test_sum_of_squares07)
+{
+    // ([1, 4, 6, 5, 4, 3, 15, 4, 3, 6, 7], 438),
+    double result;
+    result = sum_of_squares({1, 4, 6, 5, 4, 3, 15, 4, 3, 6, 7});
+    EXPECT_EQ(438, result);
+}
+TEST(test_sum_of_squares, test_sum_of_squares08)
+{
+    // ([1, 0, 0, 1], 2)
+    double result;
+    result = sum_of_squares({1, 0, 0, 1});
+    EXPECT_EQ(2.0, result);
+}
+
 TEST(test_magnitude, test_magnitude01)
 {
     // ([10, 10, 10], math.sqrt(30)),
@@ -248,6 +278,6 @@ TEST(test_matrix_add, test_matrix_add02)
 
     // ([[1, 0], [0, 1]], [[1, 2], [3, 4]], [[2, 2], [3, 5]])
     std::vector<std::vector<double>> result = matrix_add({{1, 0}, {0, 1}}, {{1, 2}, {3, 4}});
-    EXPECT_THAT(result[0], testing::ElementsAre(2,2));
-    EXPECT_THAT(result[1], testing::ElementsAre(3,5));
+    EXPECT_THAT(result[0], testing::ElementsAre(2, 2));
+    EXPECT_THAT(result[1], testing::ElementsAre(3, 5));
 }
