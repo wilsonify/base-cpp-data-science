@@ -5,3 +5,4 @@
 #include "linear-algebra.h"
 #include "stats.h"
 #include "machine-learning.h"
+#include "simple-linear-regression.h"
