@@ -16,7 +16,7 @@ double sum_of_squared_errors(double alpha, double beta, std::vector<double> x, s
     assert(x.size() == y.size());
     for (int i = 0; i < x.size(); i++)
     {
-        result = result + std::pow(error(alpha, beta, x[i], y[i]), 2)
+        result = result + std::pow(error(alpha, beta, x[i], y[i]), 2);
     }
     return result;
 }
@@ -67,5 +67,5 @@ double squared_error_gradient_alpha(double x_i, double y_i, double alpha, double
 
 double squared_error_gradient_beta(double x_i, double y_i, double alpha, double beta)
 {
-    -2 * error(alpha, beta, x_i, y_i) * x_i; // beta partial derivative
+    return -2 * error(alpha, beta, x_i, y_i) * x_i; // beta partial derivative
 }
