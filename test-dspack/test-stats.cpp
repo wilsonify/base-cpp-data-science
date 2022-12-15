@@ -1,4 +1,5 @@
 #include <gtest/gtest.h>
+#include "gmock/gmock-matchers.h"
 #include <unordered_map>
 #include "dspack.h"
 
@@ -38,6 +39,106 @@ TEST(test_make_histogram, test_make_histogram01)
     EXPECT_EQ(result[5], 8);
     EXPECT_EQ(result[10], 4);
     EXPECT_EQ(result[15], 1);
+}
+
+TEST(test_mean, test_mean01)
+{
+    // ([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 5.5)
+    double result;
+    result = mean({1, 2, 3, 4, 5, 6, 7, 8, 9, 10});
+    result = round(result, 2);
+    EXPECT_EQ(5.5, result);
+}
+TEST(test_mean, test_mean02)
+{
+    // ([1, 2, 3, 4, 5, 100, 123], 34)
+    double result;
+    result = mean({1, 2, 3, 4, 5, 100, 123});
+    result = round(result, 2);
+    EXPECT_EQ(34, result);
+}
+
+TEST(test_mean, test_mean03)
+{
+    // ([1, 4, 6, 5, 4, 3, 15, 4, 3, 6, 7], pytest.approx(5.27, abs=0.01))
+    double result;
+    result = mean({1, 4, 6, 5, 4, 3, 15, 4, 3, 6, 7});
+    result = round(result, 2);
+    EXPECT_EQ(5.27, result);
+}
+TEST(test_mean, test_mean04)
+{
+    // ([1, 0, 0, 1], pytest.approx(0.5, abs=0.01))
+    double result;
+    result = mean({1, 0, 0, 1});
+    result = round(result, 2);
+    EXPECT_EQ(0.5, result);
+}
+
+TEST(test_median, test_median01)
+{
+    // ([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 5.5),
+
+    double result;
+    result = median({1, 2, 3, 4, 5, 6, 7, 8, 9, 10});
+
+    EXPECT_EQ(5.5, result);
+}
+
+TEST(test_median, test_median02)
+{
+    // ([1, 2, 3, 4, 5, 100, 123], 4),
+    double result;
+    result = median({1, 2, 3, 4, 5, 100, 123});
+    EXPECT_EQ(4.0, result);
+}
+
+TEST(test_median, test_median03)
+{
+    // ([1, 4, 6, 5, 4, 3, 15, 4, 3, 6, 7], 4),
+    double result;
+    result = median({1, 4, 6, 5, 4, 3, 15, 4, 3, 6, 7});
+    EXPECT_EQ(4.0, result);
+}
+
+TEST(test_median, test_median04)
+{
+    // ([1, 0, 0, 1], 0.5)
+    double result;
+    result = median({1, 0, 0, 1});
+    EXPECT_EQ(0.5, result);
+}
+
+TEST(test_mode, test_mode01)
+{
+    // ([1, 2, 3, 4, 5, 5, 6, 7, 8, 9, 10], [5]),
+    std::vector<double> result;
+    result = mode({1, 2, 3, 4, 5, 5, 6, 7, 8, 9, 10});
+    EXPECT_THAT(result, testing::ElementsAre(5));
+}
+
+TEST(test_mode, test_mode02)
+{
+    // ([1, 2, 3, 4, 5, 100, 123, 98, 98], [98]),
+    std::vector<double> result;
+    result = mode({1, 2, 3, 4, 5, 100, 123, 98, 98});
+    EXPECT_THAT(result, testing::ElementsAre(98));
+}
+
+TEST(test_mode, test_mode03)
+{
+    // ([1, 4, 6, 5, 4, 3, 3, 15, 4, 3, 6, 7, 3], [3]),
+    std::vector<double> result;
+    result = mode({1, 4, 6, 5, 4, 3, 3, 15, 4, 3, 6, 7, 3});
+    EXPECT_THAT(result, testing::ElementsAre(3.0));
+}
+
+TEST(test_mode, test_mode04)
+{
+    // ([1, 0, 0, 1], [1, 0])
+    std::vector<double> result;
+    result = mode({1, 0, 0, 1});
+    EXPECT_THAT(result, testing::ElementsAre(0, 1));
 }
 
 // TEST(test_correlation, test_correlation01)
@@ -198,100 +299,6 @@ TEST(test_make_histogram, test_make_histogram01)
 //     double result;
 //     result = interquartile_range({1, 0, 0, 1});
 //     EXPECT_EQ(1.0, result);
-// }
-// TEST(test_mean, test_mean01)
-// {
-//     // ([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 5.5)
-//     double result;
-//     result = mean({1, 2, 3, 4, 5, 6, 7, 8, 9, 10});
-//     EXPECT_EQ(5.5, result);
-// }
-// TEST(test_mean, test_mean02)
-// {
-//     // ([1, 2, 3, 4, 5, 100, 123], 34)
-//     double result;
-//     result = mean({1, 2, 3, 4, 5, 100, 123});
-//     EXPECT_EQ(34, result);
-// }
-
-// TEST(test_mean, test_mean03)
-// {
-//     // ([1, 4, 6, 5, 4, 3, 15, 4, 3, 6, 7], pytest.approx(5.27, abs=0.01))
-//     double result;
-//     result = mean({1, 4, 6, 5, 4, 3, 15, 4, 3, 6, 7});
-//     EXPECT_EQ(5.27, result);
-// }
-// TEST(test_mean, test_mean04)
-// {
-//     // ([1, 0, 0, 1], pytest.approx(0.5, abs=0.01))
-//     double result;
-//     result = mean({1, 0, 0, 1});
-//     EXPECT_EQ(0.5, result);
-// }
-
-// TEST(test_median, test_median01)
-// {
-//     // ([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 5.5),
-
-//     double result;
-//     result = median({1, 2, 3, 4, 5, 6, 7, 8, 9, 10});
-//     EXPECT_EQ(5.5, result);
-// }
-
-// TEST(test_median, test_median02)
-// {
-//     // ([1, 2, 3, 4, 5, 100, 123], 4),
-//     double result;
-//     result = median({1, 2, 3, 4, 5, 100, 123});
-//     EXPECT_EQ(4.0, result);
-// }
-
-// TEST(test_median, test_median03)
-// {
-//     // ([1, 4, 6, 5, 4, 3, 15, 4, 3, 6, 7], 4),
-//     double result;
-//     result = median({1, 4, 6, 5, 4, 3, 15, 4, 3, 6, 7});
-//     EXPECT_EQ(4.0, result);
-// }
-
-// TEST(test_median, test_median04)
-// {
-//     // ([1, 0, 0, 1], 0.5)
-//     double result;
-//     result = median({1, 0, 0, 1});
-//     EXPECT_EQ(0.5, result);
-// }
-
-// TEST(test_mode, test_mode01)
-// {
-//     // ([1, 2, 3, 4, 5, 5, 6, 7, 8, 9, 10], [5]),
-//     std::vector<double> result;
-//     result = mode({1, 2, 3, 4, 5, 5, 6, 7, 8, 9, 10});
-//     EXPECT_EQ({3}, result);
-// }
-
-// TEST(test_mode, test_mode02)
-// {
-//     // ([1, 2, 3, 4, 5, 100, 123, 98, 98], [98]),
-//     std::vector<double> result;
-//     result = mode({1, 2, 3, 4, 5, 100, 123, 98, 98});
-//     EXPECT_EQ({98}, result);
-// }
-
-// TEST(test_mode, test_mode03)
-// {
-//     // ([1, 4, 6, 5, 4, 3, 3, 15, 4, 3, 6, 7, 3], [3]),
-//     std::vector<double> result;
-//     result = mode({1, 4, 6, 5, 4, 3, 3, 15, 4, 3, 6, 7, 3});
-//     EXPECT_EQ({3.0}, result);
-// }
-
-// TEST(test_mode, test_mode04)
-// {
-//     // ([1, 0, 0, 1], [1, 0])
-//     std::vector<double> result;
-//     result = mode({1, 0, 0, 1});
-//     EXPECT_EQ({1,0}, result);
 // }
 
 // TEST(test_quantile, test_quantile01)

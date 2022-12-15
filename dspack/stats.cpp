@@ -1,5 +1,7 @@
 #include <cmath>
 #include <unordered_map>
+#include <algorithm>
+#include <array>
 #include "linear-algebra.h"
 
 double bucketize(double point, double bucket_size)
@@ -24,10 +26,9 @@ std::unordered_map<double, int> make_histogram(std::vector<double> points, doubl
 double mean(std::vector<double> x)
 {
     double result = 0.0;
-    if (x.size() > 0)
-    {
-        result = std::accumulate(x.begin(), x.end(), 0) / x.size();
-    }
+    double eps = 0.001;
+    double n = x.size();
+    result = std::accumulate(x.begin(), x.end(), 0) / (n + eps);
     return result;
 }
 
@@ -97,35 +98,53 @@ std::vector<std::vector<double>> correlation_matrix(std::vector<std::vector<doub
     return result;
 }
 
-// double median(std::vector<double> v)
-// {
-//     /* finds the 'middle-most' value of v */
-//     int n = v.size();
-//     sorted_v = sorted(v);
-//     midpoint = n // 2;
-//     if (n % 2 == 1)
-//     {
-//         // if odd, return the middle value
-//         return sorted_v[midpoint]
-//     }
-//     else
-//     {
-//         // if even, return the average of the middle values
-//         lo = midpoint - 1 hi = midpoint return (sorted_v[lo] + sorted_v[hi]) / 2
-//     }
-// }
+double median(std::vector<double> v)
+{
+    /* finds the 'middle-most' value of v */
+    std::vector<double> workingcopy = v;
+    double result;
+    int n = v.size() - 1;
+    int midpoint_low = std::floor(n / 2.0);
+    int midpoint_high = std::ceil(n / 2.0);
+    std::nth_element(workingcopy.begin(), workingcopy.begin() + midpoint_low, workingcopy.end());
+    result = (workingcopy[midpoint_low] + workingcopy[midpoint_high]) / 2.0;
+    return result;
+}
+
+std::vector<double> mode(std::vector<double> x)
+{
+    /* returns a vector since there might be more than one mode */
+    std::unordered_map<double, int> counts;
+    std::vector<double> result = {};
+    double max_count = 0;
+
+    for (int i = 0; i < x.size(); i++)
+    {
+        counts[x[i]]++;
+        if (counts[x[i]] > max_count)
+        {
+            max_count = counts[x[i]];
+        }
+    }
+
+    for (auto &it : counts)
+    {
+        double key = it.first;
+        int value = it.second;
+        if (value == max_count)
+        {
+            result.push_back(key);
+        }
+    }
+
+    return result;
+}
 
 // double quantile( std::vector<double> x, double p) {
 //     /* returns the pth-percentile value in x */
 //     p_index = int(p * len(x))
 //     return sorted(x)[p_index]
 // }
-
-// double mode(std::vector<double> x) {
-//     /* returns a list, might be more than one mode */
-//     counts = Counter(x)
-//     max_count = max(counts.values())
-//     return [x_i for x_i, count in counts.items() if count == max_count]
 
 // }
 // // "range" already means something in Python, so we'll use a different name
