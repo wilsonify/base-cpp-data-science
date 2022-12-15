@@ -140,19 +140,39 @@ std::vector<double> mode(std::vector<double> x)
     return result;
 }
 
-// double quantile( std::vector<double> x, double p) {
-//     /* returns the pth-percentile value in x */
-//     p_index = int(p * len(x))
-//     return sorted(x)[p_index]
-// }
+double quantile(double p, std::vector<double> x)
+{
+    /* returns the pth-percentile value in x */
+    std::vector<double> workingcopy = x;
+    double result;
+    int n = x.size() - 1;
+    int p_index = std::floor(p * x.size());
+    std::nth_element(workingcopy.begin(), workingcopy.begin() + p_index, workingcopy.end());
+    result = workingcopy[p_index];
+    return result;
+}
 
-// }
-// // "range" already means something in Python, so we'll use a different name
-// double data_range(std::vector<double> x) {
-//     return max(x) - min(x)
+double interquartile_range(std::vector<double> x)
+{
+    return quantile(0.75, x) - quantile(0.25, x);
+}
 
-// }
-
-// double interquartile_range( std::vector<double> x) {
-//     return quantile(x, 0.75) - quantile(x, 0.25)
-// }
+// "range" already means something in Python, so we'll use a different name
+double data_range(std::vector<double> x)
+{
+    double maximum = 0;
+    double minimum = 100000000;
+    for (int i = 0; i < x.size(); i++)
+    {
+        if (x[i] > maximum)
+        {
+            maximum = x[i];
+        }
+        if (x[i] < minimum)
+        {
+            minimum = x[i];
+        }
+    }
+    double result = maximum - minimum;
+    return result;
+}

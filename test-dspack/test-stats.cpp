@@ -141,6 +141,72 @@ TEST(test_mode, test_mode04)
     EXPECT_THAT(result, testing::ElementsAre(0, 1));
 }
 
+TEST(test_quantile, test_quantile01)
+{
+    // (0.99, [1, 0, 0, 1], 1)
+    double result;
+    result = quantile(0.99, {1, 0, 0, 1});
+    EXPECT_EQ(1.0, result);
+}
+
+TEST(test_quantile, test_quantile02)
+{
+    // (0.1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 2),
+    double result;
+    result = quantile(0.1, {1, 2, 3, 4, 5, 6, 7, 8, 9, 10});
+    EXPECT_EQ(2.0, result);
+}
+
+TEST(test_quantile, test_quantile03)
+{
+    // (0.5, [1, 2, 3, 4, 5, 100, 123], 4),
+    double result;
+    result = quantile(0.5, {1, 2, 3, 4, 5, 100, 123});
+    EXPECT_EQ(4.0, result);
+}
+
+TEST(test_quantile, test_quantile04)
+{
+    // (0.75, [1, 4, 6, 5, 4, 3, 15, 4, 3, 6, 7], 6),
+    double result;
+    result = quantile(0.75, {1, 4, 6, 5, 4, 3, 15, 4, 3, 6, 7});
+    EXPECT_EQ(6.0, result);
+}
+
+
+TEST(test_data_range, test_data_range01)
+{
+    // ([1, 2], pytest.approx(1, abs=0.01))
+    double result;
+    result = data_range({1,2});
+    EXPECT_EQ(1.0, result);
+}
+
+TEST(test_data_range, test_data_range02)
+{
+    // ([1, 2, 10], pytest.approx(9, abs=0.01))
+    double result;
+    result = data_range({1, 2, 10});
+    EXPECT_EQ(9.0, result);
+}
+
+TEST(test_data_range, test_data_range03)
+{
+    // ([1, 2, 3, 4, 5], pytest.approx(4, abs=0.1))
+    double result;
+    result = data_range({1, 2, 3, 4, 5});
+    EXPECT_EQ(4.0, result);
+}
+
+TEST(test_data_range, test_data_range04)
+{
+    // ([1, 0, 0, 1], pytest.approx(1, abs=0.01))
+    double result;
+    result = data_range({1, 0, 0, 1});
+    EXPECT_EQ(1.0, result);
+}
+
+
 // TEST(test_correlation, test_correlation01)
 // {
 //     // ([1, 2], [2, 1], pytest.approx(-1, abs=0.01)),
@@ -207,37 +273,6 @@ TEST(test_mode, test_mode04)
 //     EXPECT_EQ(0.0, result);
 // }
 
-// TEST(test_data_range, test_data_range01)
-// {
-//     // ([1, 2], pytest.approx(1, abs=0.01))
-//     double result;
-//     result = data_range({1,2});
-//     EXPECT_EQ(1.0, result);
-// }
-
-// TEST(test_data_range, test_data_range02)
-// {
-//     // ([1, 2, 10], pytest.approx(9, abs=0.01))
-//     double result;
-//     result = data_range({1, 2, 10});
-//     EXPECT_EQ(9.0, result);
-// }
-
-// TEST(test_data_range, test_data_range03)
-// {
-//     // ([1, 2, 3, 4, 5], pytest.approx(4, abs=0.1))
-//     double result;
-//     result = data_range({1, 2, 3, 4, 5});
-//     EXPECT_EQ(4.0, result);
-// }
-
-// TEST(test_data_range, test_data_range04)
-// {
-//     // ([1, 0, 0, 1], pytest.approx(1, abs=0.01))
-//     double result;
-//     result = data_range({1, 0, 0, 1});
-//     EXPECT_EQ(1.0, result);
-// }
 
 // TEST(test_de_mean, test_de_mean01)
 // {
@@ -299,38 +334,6 @@ TEST(test_mode, test_mode04)
 //     double result;
 //     result = interquartile_range({1, 0, 0, 1});
 //     EXPECT_EQ(1.0, result);
-// }
-
-// TEST(test_quantile, test_quantile01)
-// {
-//     // (0.99, [1, 0, 0, 1], 1)
-//     double result;
-//     result = quantile(0.99,{1, 0, 0, 1});
-//     EXPECT_EQ(1.0, result);
-// }
-
-// TEST(test_quantile, test_quantile02)
-// {
-//     // (0.1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 2),
-//     double result;
-//     result = quantile(0.1, {1, 2, 3, 4, 5, 6, 7, 8, 9, 10});
-//     EXPECT_EQ(2.0, result);
-// }
-
-// TEST(test_quantile, test_quantile03)
-// {
-//     // (0.5, [1, 2, 3, 4, 5, 100, 123], 4),
-//     double result;
-//     result = quantile(0.5, {1, 2, 3, 4, 5, 100, 123});
-//     EXPECT_EQ(4.0, result);
-// }
-
-// TEST(test_quantile, test_quantile04)
-// {
-//     // (0.75, [1, 4, 6, 5, 4, 3, 15, 4, 3, 6, 7], 6),
-//     double result;
-//     result = quantile(0.75, {1, 4, 6, 5, 4, 3, 15, 4, 3, 6, 7});
-//     EXPECT_EQ(6.0, result);
 // }
 
 // TEST(test_standard_deviation, test_standard_deviation01)
