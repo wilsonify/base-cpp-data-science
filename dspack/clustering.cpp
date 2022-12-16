@@ -1,18 +1,25 @@
 #include "linear-algebra.h"
+#include "kmeans.h"
 
-// double squared_clustering_errors(inputs, k)
-// {
-//     /* finds the total squared error from k-means clustering the inputs */
-//     clusterer = KMeans(k)
-//     clusterer.train(inputs)
-//     means = clusterer.means
-//     assignments = list(map(clusterer.classify, inputs))
+double squared_clustering_errors(std::vector<std::vector<double>> inputs, int k)
+{
+    /* finds the total squared error from k-means clustering the inputs */
+    KMeans clusterer = KMeans(k);
+    clusterer.train(inputs);
+    std::vector<double> assignments = {};
+    for (int i = 0; i < inputs.size(); i++)
+    {
+        assignments[i] = clusterer.classify(inputs[i]);
+    }
 
-//     return sum(
-//         squared_distance(inputs, means[cluster_])
-//         for inputs, cluster_ in zip(inputs, assignments)
-//     )
-// }
+    double result = 0.0;
+    for (int i = 0; i < inputs.size(); i++)
+    {
+        int assigned_cluster = assignments[i];
+        result = result + squared_distance(inputs[i], clusterer.means[assigned_cluster]);
+    }
+    return result;
+}
 
 // //
 // // using clustering to recolor an image

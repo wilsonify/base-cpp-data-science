@@ -1,5 +1,5 @@
 
-#include "naive_bayes.h"
+#include "naive-bayes.h"
 
 // double word_count_old(documents)
 // {

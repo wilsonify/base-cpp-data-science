@@ -1,5 +1,5 @@
 
-#include "gradient_descent.h"
+#include "gradient-descent.h"
 #include "linear-algebra.h"
 #include "stats.h"
 

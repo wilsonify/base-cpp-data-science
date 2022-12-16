@@ -3,9 +3,13 @@
 class KMeans
 {
     /* performs k-means clustering */
-    KMeans(int k);
+
+private:
     int k;
+
+public:
+    KMeans(int k);
     std::vector<std::vector<double>> means;
     int classify(std::vector<double> inputs);
-    double train(std::vector<std::vector<double>> inputs);
-}
+    void train(std::vector<std::vector<double>> inputs);
+};
