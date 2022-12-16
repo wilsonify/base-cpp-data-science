@@ -1,39 +1,60 @@
 
-// /* class KMeans: performs k-means clustering */
+#include "kmeans.h"
+#include "linear-algebra.h"
 
-// void KMeans::KMeans(integer k)
-// {
-//     this->k = k;        // number of clusters
-//     this->means = None; // means of clusters
-// }
+/* class KMeans: performs k-means clustering */
 
-// double KMeans::classify(*this, inputs)
-// {
-//     /* return the index of the cluster closest to the input */
-//     return min(range(*this->k), key = lambda i
-//                : squared_distance(inputs, *this->means[i]))
-// }
+KMeans::KMeans(int k)
+{
+    this->k = k;      // number of clusters
+    this->means = {}; // means of clusters
+}
 
-// double KMeans::train(*this, inputs)
-// {
+int KMeans::classify(std::vector<double> inputs)
+{
+    /* return the index of the cluster closest to the input */
+    double smallest = 10000000;
+    double squared_distance_input_to_mean = 10000000;
+    int result = 0;
+    for (int i = 0; i < this->k; i++)
+    {
+        squared_distance_input_to_mean = squared_distance(inputs, this->means[i]);
+        if (squared_distance_input_to_mean < smallest)
+        {
+            smallest = squared_distance_input_to_mean;
+            result = i;
+        }
+    }
+    return result;
+}
 
-//         *this->means = random.sample(inputs, *this->k)
-//         assignments = None
+double KMeans::train(std::vector<std::vector<double>> inputs)
+{
+    this->means = random.sample(inputs, this->k);
+    std::vector<double> assignments = {};
+    std::vector<double> new_assignments = {};
+    while (1)
+    {
+        // Find new assignments
+        for (int i = 0; i < inputs.size(); i++)
+        {
+            new_assignments[i] = this->classify(inputs[i])
+        }
 
-//         while True:
-//             // Find new assignments
-//             new_assignments = list(map(*this->classify, inputs))
+        // If no assignments have changed, we're done.
+        if (assignments == new_assignments)
+        {
+            break;
+        }
 
-//             // If no assignments have changed, we're done.
-//             if assignments == new_assignments:
-//                 return
+        // Otherwise keep the new assignments,
+        assignments = new_assignments;
 
-//             // Otherwise keep the new assignments,
-//             assignments = new_assignments
+        for (int i = 0; i < this->k; i++)
+        {
 
-//             for i in range(*this->k):
-//                 i_points = [p for p, a in zip(inputs, assignments) if a == i]
-//                 // avoid divide-by-zero if i_points is empty
-//                 if i_points:
-//                     *this->means[i] = vector_mean(i_points)
-// }
+            // i_points = [p for p, a in zip(inputs, assignments) if a == i]
+            // this->means[i] = vector_mean(i_points)
+        }
+    }
+}
