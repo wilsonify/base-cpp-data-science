@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 #include "dspack.h"
 
-TEST(smokeTest, BasicAssertion)
+TEST(test_smoke_probability, test_smoke_probability01)
 {
     EXPECT_EQ(7 * 6, 42);
 }

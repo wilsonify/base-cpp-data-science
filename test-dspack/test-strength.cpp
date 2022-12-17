@@ -2,7 +2,7 @@
 #include "gmock/gmock-matchers.h"
 #include "dspack.h"
 
-TEST(strengthTests, strengthTests01)
+TEST(test_strength, test_strength01)
 {
     double result;
     result = strength(25.0, 50.0);
@@ -10,7 +10,7 @@ TEST(strengthTests, strengthTests01)
     EXPECT_EQ(0.5, result);
 }
 
-TEST(strengthTests, strengthTests02)
+TEST(test_strength, test_strength02)
 {
     double result;
     result = strength(-25.0, 20.0);
@@ -18,7 +18,7 @@ TEST(strengthTests, strengthTests02)
     EXPECT_EQ(-1.2, result);
 }
 
-TEST(strengthTests, strengthTests03)
+TEST(test_strength, test_strength03)
 {
     double result;
     result = strength(100.0, 100.0);
@@ -26,7 +26,7 @@ TEST(strengthTests, strengthTests03)
     EXPECT_EQ(1.0, result);
 }
 
-TEST(strengthTests, strengthTests04)
+TEST(test_strength, test_strength04)
 {
     double result;
     result = strength(44944.0, 50000.0);
@@ -34,7 +34,7 @@ TEST(strengthTests, strengthTests04)
     EXPECT_EQ(0.9, result);
 }
 
-TEST(strengthvectorTests, strengthvectorTests01)
+TEST(test_strength_vector, test_strength_vector01)
 {
     std::vector<double> result;
     result = strength_vector({1, 4, 9, 16, 25}, {25, 25, 25, 25, 25});

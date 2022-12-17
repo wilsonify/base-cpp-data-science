@@ -1,3 +1,4 @@
+#include <cassert>
 #include "linear-algebra.h"
 #include "kmeans.h"
 
@@ -21,39 +22,44 @@ double squared_clustering_errors(std::vector<std::vector<double>> inputs, int k)
     return result;
 }
 
-// //
-// // using clustering to recolor an image
-// //
-
-// //
-// // hierarchical clustering
-// //
-
-// double is_leaf(cluster_)
+// bool is_leaf(std::vector<std::vector<double>> cluster_)
 // {
 //     /* a cluster is a leaf if it has length 1 */
-//     return len(cluster_) == 1
+//     return cluster_.size() == 1;
 // }
 
-// double get_children(cluster_)
+// std::vector<std::vector<double>> get_children(std::vector<std::vector<double>> cluster_)
 // {
-//     /*returns the two children of this cluster if it's a merged cluster;
-//     raises an exception if this is a leaf cluster*/
-//     if is_leaf (cluster_):
-//         raise TypeError("a leaf cluster has no children")
-//     else:
-//         return cluster_[1]
+//     /*
+//     returns the two children of this cluster if it's a merged cluster;
+//     raises an exception if this is a leaf cluster
+//     */
+//     assert(!is_leaf(cluster_));
+//     return {cluster_[1]};
 // }
-// double get_values(cluster_)
+
+// std::vector<double> get_values(std::vector<double> cluster_)
 // {
-//     /*returns the value in this cluster (if it's a leaf cluster)
-//     or all the values in the leaf clusters below it (if it's not)*/
-//     if is_leaf (cluster_):
-//         return cluster_  // is already a 1-tuple containing value
-//     else:
-//         return [
-//             value for child in get_children(cluster_) for value in get_values(child)
-//         ]
+//     /*
+//     returns the value in this cluster (if it's a leaf cluster)
+//     or all the values in the leaf clusters below it (if it's not)
+//     */
+//     std::vector<std::vector<double>> result;
+//     if (is_leaf({cluster_}))
+//     {
+//         return cluster_; // is already a 1-tuple containing value
+//     }
+
+//     for (std::vector<double> child : get_children({cluster_}))
+//     {
+//         auto values = get_values(child);
+//         for (auto value : values)
+//         {
+//             result.push_back(value);
+//         }
+//     }
+
+//     return result;
 // }
 
 // double cluster_distance(cluster1, cluster2, distance_agg = min)

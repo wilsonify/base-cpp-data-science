@@ -3,7 +3,7 @@
 #include <unordered_map>
 #include "dspack.h"
 
-TEST(smokeTeststats, smokeTeststatsBasicAssertion)
+TEST(test_smoke_stats, test_smoke_stats01)
 {
     EXPECT_EQ(7 * 6, 42);
 }

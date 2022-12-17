@@ -2,28 +2,28 @@
 #include "gmock/gmock-matchers.h"
 #include "dspack.h"
 
-TEST(mysqrtTests, returns5With25PassedIn)
+TEST(test_mysqrt, test_mysqrt01)
 {
     double result;
     result = mysqrt(25.0);
     EXPECT_EQ(5.0, result);
 }
 
-TEST(mysqrtTests, returns0WithNegativePassedIn)
+TEST(test_mysqrt, test_mysqrt02)
 {
     double result;
     result = mysqrt(-25.0);
     EXPECT_EQ(0.0, result);
 }
 
-TEST(mysqrtTests, returns10With100PassedIn)
+TEST(test_mysqrt, test_mysqrt03)
 {
     double result;
     result = mysqrt(100.0);
     EXPECT_EQ(10.0, result);
 }
 
-TEST(mysqrtTests, returns212With44944PassedIn)
+TEST(test_mysqrt, test_mysqrt04)
 {
     double result;
     result = mysqrt(44944.0);
@@ -31,7 +31,7 @@ TEST(mysqrtTests, returns212With44944PassedIn)
     EXPECT_EQ(212.03, result);
 }
 
-TEST(mysqrtvectorTests, mysqrtvector01)
+TEST(test_mysqrt, test_mysqrt05)
 {
     std::vector<double> result;
     result = mysqrt_vector({1, 4, 9, 16, 25});

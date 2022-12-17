@@ -2,7 +2,7 @@
 #include "gmock/gmock-matchers.h"
 #include "dspack.h"
 
-TEST(smokeTestLA, BasicAssertionLA)
+TEST(test_smoke_linear_algebra, test_smoke_linear_algebra01)
 {
     EXPECT_EQ(7 * 6, 42);
 }

@@ -1,6 +1,7 @@
 #include <cmath>
+#include <vector>
 
-// double entropy(probabilities);
+double entropy(std::vector<double> class_probabilities);
 // double get_class_probabilities(labels);
 // double data_entropy(labeled_data);
 // double partition_entropy(subsets);

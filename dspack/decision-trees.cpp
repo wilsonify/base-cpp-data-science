@@ -1,21 +1,46 @@
 /*
 A decision tree uses a tree structure to represent a number of possible decision paths and an outcome for each path.
-
 */
 
 #include <cmath>
+#include <vector>
+#include <unordered_map>
 
-// double entropy(class_probabilities)
-// {
-//     /* given a list of class probabilities, compute the entropy */
-//     return sum(-p * math.log(p, 2) for p in class_probabilities if p)
-// }
+double entropy(std::vector<double> class_probabilities)
+{
+    /* given a list of class probabilities, compute the entropy */
+    double result = 0.0;
+    double logp = 0.0;
+    for (double p : class_probabilities)
+    {
+        logp = -std::log2(p);
+        result = result + (p * logp);
+    }
 
-// double get_class_probabilities(labels)
-// {
-//     total_count = len(labels)
-//     return [count / total_count for count in Counter(labels).values()]
-// }
+    return result;
+}
+
+std::vector<double> get_class_probabilities(std::vector<int> labels)
+{
+    double total_count = labels.size();
+    std::unordered_map<int, int> label_counter;
+    for (int i = 0; i < total_count; i++)
+    {
+        label_counter[labels[i]]++;
+    }
+
+    std::vector<double> result;
+    result.resize(label_counter.size());
+    int i = 0;
+    for (std::pair<const int, int> &it : label_counter)
+    {
+        int label = it.first;
+        int count = it.second;
+        result[i] = count / total_count;
+        i++;
+    }
+    return result;
+}
 
 // double data_entropy(labeled_data)
 // {
