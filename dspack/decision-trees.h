@@ -2,7 +2,7 @@
 #include <vector>
 
 double entropy(std::vector<double> class_probabilities);
-// double get_class_probabilities(labels);
+std::vector<double> get_class_probabilities(std::vector<int> labels);
 // double data_entropy(labeled_data);
 // double partition_entropy(subsets);
 // double group_by(items, key_fn);

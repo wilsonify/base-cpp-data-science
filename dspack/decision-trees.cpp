@@ -5,6 +5,7 @@ A decision tree uses a tree structure to represent a number of possible decision
 #include <cmath>
 #include <vector>
 #include <unordered_map>
+#include "linear-algebra.h"
 
 double entropy(std::vector<double> class_probabilities)
 {
@@ -32,9 +33,8 @@ std::vector<double> get_class_probabilities(std::vector<int> labels)
     std::vector<double> result;
     result.resize(label_counter.size());
     int i = 0;
-    for (std::pair<const int, int> &it : label_counter)
+    for (std::pair<const int, int> it : label_counter)
     {
-        int label = it.first;
         int count = it.second;
         result[i] = count / total_count;
         i++;
@@ -42,20 +42,34 @@ std::vector<double> get_class_probabilities(std::vector<int> labels)
     return result;
 }
 
-// double data_entropy(labeled_data)
-// {
-//     labels = [label for _, label in labeled_data]
-//     probabilities = get_class_probabilities(labels)
-//     return entropy(probabilities)
-// }
+double data_entropy(std::vector<std::vector<double>> labeled_data)
+{
+    unsigned long label_index_ul = labeled_data.size() - 1;
+    auto label_index_double = double(label_index_ul);
+    std::vector<double> labels_double = get_column(labeled_data, label_index_double);
+    std::vector<int> labels_int = double_to_int_vector(labels_double);
+    std::vector<double> probabilities = get_class_probabilities(labels_int);
+    double result = entropy(probabilities);
+    return result;
+}
 
-// double partition_entropy(subsets)
-// {
-//     /* find the entropy from this partition of data into subsets */
-//     total_count = sum(len(subset) for subset in subsets)
+double partition_entropy(std::vector<std::vector<std::vector<double>>> subsets)
+{
+    /* find the entropy from this partition of data into subsets */
 
-//     return sum(data_entropy(subset) * len(subset) / total_count for subset in subsets)
-// }
+    double total_count = 0.0;
+    for (std::vector<std::vector<double>> subset : subsets)
+    {
+        total_count = total_count + subset.size();
+    }
+    double result = 0.0;
+    for (std::vector<std::vector<double>> subset : subsets)
+    {
+        result = result + (data_entropy(subset) * subset.size() / total_count);
+    }
+
+    return result;
+}
 
 // double group_by(items, key_fn)
 // {

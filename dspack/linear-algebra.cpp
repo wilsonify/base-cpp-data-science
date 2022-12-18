@@ -4,6 +4,17 @@
 #include <numeric>
 #include <functional>
 
+std::vector<int> double_to_int_vector(std::vector<double> x)
+{
+    std::vector<int> result;
+    result.resize(x.size());
+    for (int i = 0; i < x.size(); i++)
+    {
+        result[i] = int(x[i]);
+    }
+    return result;
+}
+
 std::vector<double> vector_add(std::vector<double> v, std::vector<double> w)
 {
     /* adds two vectors componentwise */

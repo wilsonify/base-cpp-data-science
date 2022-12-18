@@ -21,16 +21,10 @@ TEST(test_entropy, test_entropy02)
     result = round(result, 2);
     EXPECT_EQ(0.94, result);
 }
-// TEST(mysqrtTests, returns0WithNegativePassedIn)
-// {
-//     double result;
-//     result = mysqrt(-25.0);
-//     EXPECT_EQ(0.0, result);
-// }
-
-// TEST(mysqrtvectorTests, mysqrtvector01)
-// {
-//     std::vector<double> result;
-//     result = mysqrt_vector({1, 4, 9, 16, 25});
-//     EXPECT_THAT(result, testing::ElementsAre(1, 2, 3, 4, 5));
-// }
+TEST(test_get_class_probabilities, test_get_class_probabilities01)
+{
+    std::vector<double> result;
+    result = get_class_probabilities({1, 1, 1, 1, 1, 1, 2, 2, 2, 3, 2, 3, 2, 3, 5, 4, 3, 3, 4, 5});
+    result = round_vector(result, 2);
+    EXPECT_THAT(result, testing::ElementsAre(0.1, 0.1, 0.25, 0.25, 0.3));
+}
