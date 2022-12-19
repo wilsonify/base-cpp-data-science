@@ -23,7 +23,7 @@ double entropy(std::vector<double> class_probabilities)
 
 std::vector<double> get_class_probabilities(std::vector<int> labels)
 {
-    double total_count = labels.size();
+    auto total_count = double(labels.size());
     std::unordered_map<int, int> label_counter;
     for (int i = 0; i < total_count; i++)
     {
@@ -60,35 +60,30 @@ double partition_entropy(std::vector<std::vector<std::vector<double>>> subsets)
     double total_count = 0.0;
     for (std::vector<std::vector<double>> subset : subsets)
     {
-        total_count = total_count + subset.size();
+        total_count = total_count + double(subset.size());
     }
     double result = 0.0;
     for (std::vector<std::vector<double>> subset : subsets)
     {
-        result = result + (data_entropy(subset) * subset.size() / total_count);
+        result = result + (data_entropy(subset) * double(subset.size()) / total_count);
     }
 
     return result;
 }
 
-// double group_by(items, key_fn)
-// {
-//     /*returns a defaultdict(list), where each input item
-//     is in the list whose key is key_fn(item)*/
-//     groups = defaultdict(list)
-//     for item in items:
-//         key = key_fn(item)
-//         groups[key].append(item)
-//     return groups
-// }
-
-// double partition_by(inputs, attribute)
-// {
-//     /*returns a dict of inputs partitioned by the attribute
-//     each input is a pair (attribute_dict, label)*/
-//     return group_by(inputs, lambda x
-//                     : x[0][attribute])
-// }
+std::unordered_map<double, std::vector<std::vector<double>>> partition_by(std::vector<std::vector<double>> inputs, int attribute)
+{
+    /*returns a dict of inputs partitioned by the attribute
+    each input is a pair (attribute_dict, label)*/
+    std::unordered_map<double, std::vector<std::vector<double>>> groups;
+    double key;
+    for (std::vector<double> item : inputs)
+    {
+        key = item[attribute];
+        groups[key].push_back(item);
+    }
+    return groups;
+}
 
 // double partition_entropy_by(inputs, attribute)
 // {

@@ -28,3 +28,17 @@ TEST(test_get_class_probabilities, test_get_class_probabilities01)
     result = round_vector(result, 2);
     EXPECT_THAT(result, testing::ElementsAre(0.1, 0.1, 0.25, 0.25, 0.3));
 }
+
+TEST(test_partition_by, partition_by01)
+{
+    std::unordered_map<double, std::vector<std::vector<double>>> result;
+    result = partition_by(
+        {{1, 1, 1, 1, 1, 1, 2, 2, 2, 3, 2, 3, 2, 3, 5, 4, 3, 3, 4, 5},
+         {1, 1, 1, 1, 1, 1, 2, 2, 2, 3, 2, 3, 2, 3, 5, 4, 3, 3, 4, 5},
+         {1, 1, 1, 1, 1, 1, 2, 2, 2, 3, 2, 3, 2, 3, 5, 4, 3, 3, 4, 5}},
+        1);
+    for (auto const &part : result)
+    {
+        EXPECT_EQ(part.second.size(), 3);
+    }
+}

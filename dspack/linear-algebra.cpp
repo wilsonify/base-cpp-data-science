@@ -75,7 +75,7 @@ std::vector<double> vector_mean(std::vector<std::vector<double>> vectors)
     compute the vector whose i-th element is the mean of the
     i-th elements of the input vectors
     */
-    double n = vectors.size();
+    auto n = double(vectors.size());
     double c = 1 / n;
     return scalar_multiply(c, vector_sum(vectors));
 }
@@ -116,21 +116,21 @@ double distance(std::vector<double> v, std::vector<double> w)
 
 std::pair<double, double> shape(std::vector<std::vector<double>> a_matrix)
 {
-    double num_rows = a_matrix.size();
+    auto num_rows = double(a_matrix.size());
     double num_cols = 0;
     if (num_rows > 0)
     {
-        num_cols = a_matrix[0].size();
+        num_cols = double(a_matrix[0].size());
     }
     return {num_rows, num_cols};
 }
 
-std::vector<double> get_row(std::vector<std::vector<double>> a_matrix, double i)
+std::vector<double> get_row(std::vector<std::vector<double>> a_matrix, int i)
 {
-    return a_matrix[i];
+    return a_matrix[int(i)];
 }
 
-std::vector<double> get_column(std::vector<std::vector<double>> a_matrix, double j)
+std::vector<double> get_column(std::vector<std::vector<double>> a_matrix, int j)
 {
     std::vector<double> result;
     result.resize(a_matrix.size());
@@ -147,10 +147,10 @@ std::vector<std::vector<double>> make_matrix(double num_rows, double num_cols, s
 {
     // returns a num_rows x num_cols matrix whose (i,j)-th entry is entry_fn(i, j)
     std::vector<std::vector<double>> result;
-    result.resize(num_rows);
+    result.resize(size_t(num_rows));
     for (int i = 0; i < num_rows; i++)
     {
-        result[i].resize(num_cols);
+        result[i].resize(size_t(num_cols));
         for (int j = 0; j < num_cols; j++)
         {
             result[i][j] = entry_fn(i, j);
@@ -173,10 +173,10 @@ std::vector<std::vector<double>> matrix_add(std::vector<std::vector<double>> a_m
     double num_rows = shape_a_matrix.first;
     double num_cols = shape_a_matrix.second;
     std::vector<std::vector<double>> result;
-    result.resize(num_rows);
+    result.resize(size_t(num_rows));
     for (int i = 0; i < num_rows; i++)
     {
-        result[i].resize(num_cols);
+        result[i].resize(size_t(num_cols));
         for (int j = 0; j < num_cols; j++)
         {
             result[i][j] = a_matrix[i][j] + b_matrix[i][j];

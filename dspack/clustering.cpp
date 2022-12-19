@@ -5,7 +5,7 @@
 double squared_clustering_errors(std::vector<std::vector<double>> inputs, int k)
 {
     /* finds the total squared error from k-means clustering the inputs */
-    KMeans clusterer = KMeans(k);
+    auto clusterer = KMeans(k);
     clusterer.train(inputs);
     std::vector<double> assignments = {};
     for (int i = 0; i < inputs.size(); i++)
@@ -16,17 +16,17 @@ double squared_clustering_errors(std::vector<std::vector<double>> inputs, int k)
     double result = 0.0;
     for (int i = 0; i < inputs.size(); i++)
     {
-        int assigned_cluster = assignments[i];
+        auto assigned_cluster = int(assignments[i]);
         result = result + squared_distance(inputs[i], clusterer.means[assigned_cluster]);
     }
     return result;
 }
 
-// bool is_leaf(std::vector<std::vector<double>> cluster_)
-// {
-//     /* a cluster is a leaf if it has length 1 */
-//     return cluster_.size() == 1;
-// }
+bool is_leaf(std::vector<std::vector<double>> cluster_)
+{
+    /* a cluster is a leaf if it has length 1 */
+    return cluster_.size() == 1;
+}
 
 // std::vector<std::vector<double>> get_children(std::vector<std::vector<double>> cluster_)
 // {

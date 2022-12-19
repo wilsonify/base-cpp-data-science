@@ -17,7 +17,7 @@ std::unordered_map<double, int> make_histogram(std::vector<double> points, doubl
     for (int i = 0; i < points.size(); i++)
     {
         double point = points[i];
-        int bucket = bucketize(point, bucket_size);
+        auto bucket = int(bucketize(point, bucket_size));
         counter[bucket]++;
     }
     return counter;
@@ -27,7 +27,7 @@ double mean(std::vector<double> x)
 {
     double result = 0.0;
     double eps = 0.001;
-    double n = x.size();
+    auto n = double(x.size());
     for (int i = 0; i < n; i++)
     {
         result = result + x[i];
@@ -52,7 +52,7 @@ std::vector<double> de_mean(std::vector<double> x)
 double variance(std::vector<double> x)
 {
     /* assumes x has at least two elements */
-    int n = x.size();
+    auto n = int(x.size());
     std::vector<double> deviations = de_mean(x);
     return sum_of_squares(deviations) / (n - 1);
 }
@@ -64,7 +64,7 @@ double standard_deviation(std::vector<double> x)
 
 double covariance(std::vector<double> x, std::vector<double> y)
 {
-    int n = x.size();
+    auto n = int(x.size());
     return dot(de_mean(x), de_mean(y)) / (n - 1);
 }
 
@@ -109,9 +109,9 @@ double median(std::vector<double> v)
     /* finds the 'middle-most' value of v */
     std::vector<double> workingcopy = v;
     double result;
-    int n = v.size() - 1;
-    int midpoint_low = std::floor(n / 2.0);
-    int midpoint_high = std::ceil(n / 2.0);
+    int n = int(v.size()) - 1;
+    auto midpoint_low = int(std::floor(n / 2.0));
+    auto midpoint_high = int(std::ceil(n / 2.0));
     std::nth_element(workingcopy.begin(), workingcopy.begin() + midpoint_low, workingcopy.end());
     result = (workingcopy[midpoint_low] + workingcopy[midpoint_high]) / 2.0;
     return result;
@@ -151,8 +151,8 @@ double quantile(double p, std::vector<double> x)
     /* returns the pth-percentile value in x */
     std::vector<double> workingcopy = x;
     double result;
-    int n = x.size() - 1;
-    int p_index = std::floor(p * x.size());
+    int n = int(x.size()) - 1;
+    auto p_index = int(std::floor(p * double(x.size())));
     std::nth_element(workingcopy.begin(), workingcopy.begin() + p_index, workingcopy.end());
     result = workingcopy[p_index];
     return result;
