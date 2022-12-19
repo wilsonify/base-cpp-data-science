@@ -2,6 +2,7 @@
 #include <unordered_map>
 #include <algorithm>
 #include <array>
+#include <iostream>
 #include "linear-algebra.h"
 
 double bucketize(double point, double bucket_size)
@@ -14,9 +15,8 @@ std::unordered_map<double, int> make_histogram(std::vector<double> points, doubl
 {
     /* buckets the points and counts how many in each bucket */
     std::unordered_map<double, int> counter;
-    for (int i = 0; i < points.size(); i++)
+    for (auto point : points)
     {
-        double point = points[i];
         auto bucket = int(bucketize(point, bucket_size));
         counter[bucket]++;
     }
@@ -88,6 +88,11 @@ std::vector<std::vector<double>> correlation_matrix(std::vector<std::vector<doub
     std::pair<int, int> shape_data = shape(data);
     int num_rows = shape_data.first;
     int num_cols = shape_data.second;
+    std::cout << "num_rows = ";
+    std::cout << num_rows;
+    std::cout << "num_cols = ";
+    std::cout << num_cols;
+
     int result_num_rows = shape_data.second;
     int result_num_cols = shape_data.second;
     std::vector<std::vector<double>> result;
@@ -124,16 +129,16 @@ std::vector<double> mode(std::vector<double> x)
     std::vector<double> result = {};
     double max_count = 0;
 
-    for (int i = 0; i < x.size(); i++)
+    for (auto x_i: x)
     {
-        counts[x[i]]++;
-        if (counts[x[i]] > max_count)
+        counts[x_i]++;
+        if (counts[x_i] > max_count)
         {
-            max_count = counts[x[i]];
+            max_count = counts[x_i];
         }
     }
 
-    for (auto &it : counts)
+    for (auto const &it : counts)
     {
         double key = it.first;
         int value = it.second;
@@ -152,6 +157,8 @@ double quantile(double p, std::vector<double> x)
     std::vector<double> workingcopy = x;
     double result;
     int n = int(x.size()) - 1;
+    std::cout << "n=";
+    std::cout << n;
     auto p_index = int(std::floor(p * double(x.size())));
     std::nth_element(workingcopy.begin(), workingcopy.begin() + p_index, workingcopy.end());
     result = workingcopy[p_index];
@@ -168,15 +175,15 @@ double data_range(std::vector<double> x)
 {
     double maximum = 0;
     double minimum = 100000000;
-    for (int i = 0; i < x.size(); i++)
+    for (auto x_i : x)
     {
-        if (x[i] > maximum)
+        if (x_i > maximum)
         {
-            maximum = x[i];
+            maximum = x_i;
         }
-        if (x[i] < minimum)
+        if (x_i < minimum)
         {
-            minimum = x[i];
+            minimum = x_i;
         }
     }
     double result = maximum - minimum;

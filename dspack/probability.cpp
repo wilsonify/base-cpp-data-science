@@ -5,6 +5,7 @@
 #include <vector>
 #include <iostream>
 #include <string_view>
+#include <random>
 
 std::string random_kid()
 {
@@ -111,6 +112,7 @@ double bernoulli_trial(double p)
      a binomial trial is a random experiment with exactly two possible outcomes.
      the probability of success is the same every time the experiment is conducted.
      */
+
      if (rand() < p)
      {
           return 1;
@@ -133,7 +135,7 @@ int factorial(int m)
 
 int n_choose_k(int n, int k)
 {
-     return factorial(n) / (factorial((n - k)) * (factorial(k)));
+     return factorial(n) / (factorial(n - k) * (factorial(k)));
 }
 
 double binomial_pmf(int k, int n, double p)
