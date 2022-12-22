@@ -28,17 +28,17 @@ bool is_leaf(std::vector<std::vector<double>> cluster_)
     return cluster_.size() == 1;
 }
 
-// std::vector<std::vector<double>> get_children(std::vector<std::vector<double>> cluster_)
-// {
-//     /*
-//     returns the two children of this cluster if it's a merged cluster;
-//     raises an exception if this is a leaf cluster
-//     */
-//     assert(!is_leaf(cluster_));
-//     return {cluster_[1]};
-// }
+std::vector<std::vector<double>> get_children(std::vector<std::vector<double>> cluster_)
+{
+    /*
+    returns the two children of this cluster if it's a merged cluster;
+    raises an exception if this is a leaf cluster
+    */
+    assert(!is_leaf(cluster_));
+    return {cluster_[1]};
+}
 
-// std::vector<double> get_values(std::vector<double> cluster_)
+// std::vector<std::vector<double>> get_values(std::vector<std::vector<double>> cluster_)
 // {
 //     /*
 //     returns the value in this cluster (if it's a leaf cluster)
@@ -50,15 +50,13 @@ bool is_leaf(std::vector<std::vector<double>> cluster_)
 //         return cluster_; // is already a 1-tuple containing value
 //     }
 
-//     for (std::vector<double> child : get_children({cluster_}))
+//     for (auto child : get_children({cluster_}))
 //     {
-//         auto values = get_values(child);
-//         for (auto value : values)
+//         for (double value : child)
 //         {
-//             result.push_back(value);
+//             result.push_back(value)
 //         }
 //     }
-
 //     return result;
 // }
 

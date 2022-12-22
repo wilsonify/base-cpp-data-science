@@ -210,6 +210,28 @@ TEST(test_distance, test_distance02)
     EXPECT_EQ(result, 19.05);
 }
 
+TEST(test_distance, test_distance03)
+{
+    // ([63, 150], [67, 160], 10.77),
+    double result = distance({63, 150}, {67, 160});
+    result = round(result, 2);
+    EXPECT_EQ(result, 10.77);
+}
+TEST(test_distance, test_distance04)
+{
+    // ([63, 150], [70, 171], 22.14),
+    double result = distance({63, 150}, {70, 171});
+    result = round(result, 2);
+    EXPECT_EQ(result, 22.14);
+}
+TEST(test_distance, test_distance05)
+{
+    // ([67, 160], [70, 171], 11.40)
+    double result = distance({67, 160}, {70, 171});
+    result = round(result, 2);
+    EXPECT_EQ(result, 11.40);
+}
+
 TEST(test_shape, test_shape01)
 {
     std::pair<double, double> result = shape({{1, 1, 1}, {-10, -10, -10}});

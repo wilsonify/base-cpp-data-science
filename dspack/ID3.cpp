@@ -136,7 +136,7 @@ double DecisionTree::getEstimatedError(double f, int N) const
         std::cout << ":: getEstimatedError :: N is zero" << std::endl;
         exit(0);
     }
-    return (f + z * z / (2 * N) + z * sqrt(f / N - f * f / N + z * z / (4 * N * N))) / (1 + z * z / N);
+    return (f + z * z / (2 * N) + z * std::sqrt(f / N - f * f / N + z * z / (4 * N * N))) / (1 + z * z / N);
 }
 
 std::pair<std::string, int> DecisionTree::getMajorityLabel(Table table) const

@@ -7,3 +7,4 @@
 #include "machine-learning.h"
 #include "simple-linear-regression.h"
 #include "decision-trees.h"
+#include "gradient-descent.h"

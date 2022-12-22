@@ -19,13 +19,10 @@ class Node
 public:
 	int criteriaAttrIndex;
 	std::string attrValue;
-
 	int treeIndex;
 	bool isLeaf = false;
 	std::string label;
-
 	std::vector<int> children;
-
 	Node() = default;
 };
 

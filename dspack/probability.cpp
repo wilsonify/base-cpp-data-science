@@ -113,7 +113,7 @@ double bernoulli_trial(double p)
      the probability of success is the same every time the experiment is conducted.
      */
 
-     if (rand() < p)
+     if (std::rand() < p)
      {
           return 1;
      }
