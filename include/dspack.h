@@ -1,3 +1,4 @@
+#pragma once
 #include "mysqrt.h"
 #include "round.h"
 #include "strength.h"

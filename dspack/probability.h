@@ -1,3 +1,4 @@
+#pragma once
 #include <cmath>
 #include <stdlib.h>
 #include <assert.h>
@@ -5,7 +6,7 @@
 
 double random_normal();
 std::string random_kid();
-double uniform_pdf(double x, double a = 0, double b = 1);
+double uniform_pdf(double x, double a = 0.0, double b = 1.0);
 double uniform_cdf(double x, double a = 0, double b = 1);
 double normal_pdf(double x, double mu = 0, double sigma = 1);
 double normal_cdf(double x, double mu = 0.0, double sigma = 1.0);
